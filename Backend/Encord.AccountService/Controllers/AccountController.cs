@@ -38,12 +38,12 @@ namespace Encord.AccountService.Controllers
         [HttpPost("login")]
         public async Task<object> Login(LoginDto model)
         {
-            var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
+            var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, false, false);
 
             if (result.Succeeded)
             {
-                var appUser = _userManager.Users.SingleOrDefault(r => r.Email == model.Email);
-                return await GenerateJwtToken(model.Email, appUser);
+                var appUser = _userManager.Users.SingleOrDefault(r => r.NormalizedUserName == model.Username.ToUpper());
+                return await GenerateJwtToken(model.Username, appUser);
             }
 
             throw new ApplicationException("INVALID_LOGIN_ATTEMPT");
@@ -54,7 +54,7 @@ namespace Encord.AccountService.Controllers
         {
             var user = new IdentityUser
             {
-                UserName = model.Email,
+                UserName = model.UserName,
                 Email = model.Email
             };
             var result = await _userManager.CreateAsync(user, model.Password);
@@ -68,11 +68,11 @@ namespace Encord.AccountService.Controllers
             throw new ApplicationException("UNKNOWN_ERROR");
         }
 
-        private async Task<object> GenerateJwtToken(string email, IdentityUser user)
+        private async Task<object> GenerateJwtToken(string userName, IdentityUser user)
         {
             var claims = new List<Claim>
             {
-                new Claim(JwtRegisteredClaimNames.Sub, email),
+                new Claim(JwtRegisteredClaimNames.Sub, userName),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(ClaimTypes.NameIdentifier, user.Id)
             };
