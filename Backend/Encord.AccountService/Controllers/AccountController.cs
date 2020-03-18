@@ -82,7 +82,7 @@ namespace Encord.AccountService.Controllers
         }
 
         [Authorize]
-        [HttpGet("getuser")]
+        [HttpGet]
         public async Task<IdentityUser> getuser()
         {
             var id = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;

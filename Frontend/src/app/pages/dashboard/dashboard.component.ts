@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AccountService } from 'src/app/services/account.service';
+import { AuthenticationService } from 'src/app/services/AuthService/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,22 +10,20 @@ import { Router } from '@angular/router';
 export class DashboardComponent implements OnInit {
 
   constructor(
-    private accountService: AccountService,
+    private authService: AuthenticationService,
     private router: Router) { }
 
   ngOnInit(): void {
-    if (this.accountService.tokenExistsAndValid()){
+    if (this.authService.tokenExistsAndValid()){
       console.log("Found a token");
     }
     else{
       console.log("No token found");
-      this.router.navigate(['./login']);
+      this.routeToLogin();
     }
   }
 
-  Logout(){
-    this.accountService.clearToken();
+  private routeToLogin(){
     this.router.navigate(['./login']);
   }
-
 }

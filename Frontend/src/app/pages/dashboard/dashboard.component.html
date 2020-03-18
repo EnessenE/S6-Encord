@@ -1,4 +1,11 @@
-<p>dashboard works!</p>
-
-<p>Currently logged in as: </p>
-<button mat-raised-button color="warn" (click)="Logout()">Logout</button>
+<div class="row">
+    <div class="col-sm-12 header">
+        <app-topbar></app-topbar>
+    </div>
+    <div class="col-sm-1 guildlist">
+        <app-guilds></app-guilds>
+    </div>
+    <div class="col-sm-11 middlepart">
+        <app-guildview></app-guildview>
+    </div>
+</div>

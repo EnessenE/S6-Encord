@@ -1,0 +1,11 @@
+.guildlist{
+    background-color: #0A0A0A;
+    min-height: 98vh;
+    max-height: 98vh;
+}
+
+.header{
+    background-color: #3E3E3E;
+    min-height: 2vh;
+    max-height: 2vh;
+}

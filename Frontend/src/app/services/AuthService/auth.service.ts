@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { HttpClient } from "@angular/common/http";
-import { Account } from '../models/account';
-import * as jwt_decode from '../../../node_modules/jwt-decode';
+import { Account } from '../../models/account';
+import { jwt_decode } from "jwt-decode";
 
 @Injectable({
   providedIn: 'root'
 })
-export class AccountService {
+export class AuthenticationService {
 
   constructor(private http: HttpClient) { }
 
@@ -27,6 +27,7 @@ export class AccountService {
   }
 
   isTokenExpired(token?: string): boolean {
+    return false;
     if(!token) token = this.getToken();
     if(!token) return true;
 
@@ -49,7 +50,7 @@ export class AccountService {
 
   public tokenExistsAndValid(): boolean{
     var token = this.getToken();
-    if (!this.isTokenExpired(token)){
+    if (token && !this.isTokenExpired(token)){
       return true;
     }
     return false;

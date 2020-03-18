@@ -5,16 +5,30 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
-import { AccountService } from './services/account.service';
+import { AuthenticationService } from './services/AuthService/auth.service';
 import { LoadingComponent } from './parts/loading/loading.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { HeaderComponent } from './parts/header/header.component';
+import { GuildsComponent } from './parts/guilds/guilds.component';
+import { UserlistComponent } from './parts/userlist/userlist.component';
+import { GuildviewComponent } from './parts/guildview/guildview.component';
+import { ChannelsComponent } from './parts/channels/channels.component';
+import { ChatviewComponent } from './parts/chatview/chatview.component';
+import { TopbarComponent } from './parts/topbar/topbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     LoadingComponent,
-    DashboardComponent
+    DashboardComponent,
+    HeaderComponent,
+    GuildsComponent,
+    UserlistComponent,
+    GuildviewComponent,
+    ChannelsComponent,
+    ChatviewComponent,
+    TopbarComponent
   ],
   imports: [
     BrowserModule,
@@ -22,7 +36,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     ReactiveFormsModule
   ],
   providers: [
-    AccountService
+    AuthenticationService
   ],
   bootstrap: [AppComponent]
 })
