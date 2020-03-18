@@ -1,3 +1,8 @@
 export const environment = {
-  production: true
+  production: true,
+  api_base: 'localhost:5001',
+
+  settings: {
+    minimalpasswordlength: 6
+  }
 };

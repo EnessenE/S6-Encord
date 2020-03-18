@@ -1,0 +1,9 @@
+body {
+    background: #201f1f !important;
+    color: white;
+} 
+
+.maincontainer {
+    height: 100vh;
+    overflow: hidden;
+}
