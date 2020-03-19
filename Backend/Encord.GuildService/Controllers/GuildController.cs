@@ -61,6 +61,7 @@ namespace Encord.GuildService.Controllers
         [HttpPost]
         public async Task<Guild> CreateGuild(Guild newGuild)
         {
+            newGuild.CreationDate = DateTime.Now;
             return await _guildContext.CreateGuild(newGuild);
         }
 

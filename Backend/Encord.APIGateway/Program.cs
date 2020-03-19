@@ -19,7 +19,7 @@ namespace Encord.APIGateway
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureAppConfiguration((host, config) => {
-                    config.AddJsonFile("ocelot.json");
+                    config.AddJsonFile("ocelot.json", optional: false, reloadOnChange: true);
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {

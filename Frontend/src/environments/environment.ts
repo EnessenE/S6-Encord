@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  api_base: 'https://localhost:5001',
+  api_base: 'https://localhost:7001',
 
   settings: {
     minimalpasswordlength: 6

@@ -1,1 +1,11 @@
-<p>guilds works!</p>
+<div class="">
+    <a *ngFor="let guild of guilds" (click)="onSelect(guild)">
+        <div class="guild">
+            <div class="table">
+                <div class="table-cell">
+                    {{guild.name}}
+                </div>
+            </div>
+        </div>
+    </a>
+</div>

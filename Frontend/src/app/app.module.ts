@@ -36,7 +36,7 @@ import { TopbarComponent } from './parts/topbar/topbar.component';
     ReactiveFormsModule
   ],
   providers: [
-    AuthenticationService
+    AuthenticationService,
   ],
   bootstrap: [AppComponent]
 })

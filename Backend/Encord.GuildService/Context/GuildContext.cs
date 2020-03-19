@@ -24,14 +24,19 @@ namespace Encord.GuildService.Context
             SqlCommand cmd = new SqlCommand();
             cmd.Parameters.AddWithValue("@Id", id);
             var data = await GetDataAsync("GetGuildOnId", cmd);
-            var result = data.Tables[0].Rows[0].ToGuild();
+            Guild result = null;
+            if (data.HasData())
+            {
+                result = data.Tables[0].Rows[0].ToGuild();
+            }
+
             return result;
         }
 
         public async Task<List<Guild>> GetAllGuilds()
         {
             SqlCommand cmd = new SqlCommand();
-            var data = await GetDataAsync("GetallGuilds", cmd);
+            var data = await GetDataAsync("GetAllGuilds", cmd);
             var result = data.Tables[0].ToGuildList();
             return result;
         }
