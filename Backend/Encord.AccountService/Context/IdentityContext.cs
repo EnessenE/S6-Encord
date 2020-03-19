@@ -1,4 +1,5 @@
 ﻿using Encord.Common.Configuration;
+using Encord.Common.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -6,7 +7,7 @@ using Microsoft.Extensions.Options;
 
 namespace Encord.AccountService.Context
 {
-    public class IdentityContext : IdentityDbContext
+    public class IdentityContext : IdentityDbContext<Account>
     {
         private readonly string _connectionString;
         private ILogger<IdentityContext> _logger;

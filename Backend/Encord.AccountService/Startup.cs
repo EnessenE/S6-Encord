@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Encord.AccountService.Context;
 using Encord.Common.Configuration;
+using Encord.Common.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -33,8 +34,6 @@ namespace Encord.AccountService
 
             services.AddLogging(loggingBuilder => loggingBuilder.AddSerilog(dispose: true));
 
-            services.AddTransient<IdentityContext>();
-
             services.AddSwaggerDocument(document =>
             {
                 document.Title = "Account API";
@@ -60,13 +59,16 @@ namespace Encord.AccountService
 
             services.Configure<SQLSettings>(Configuration.GetSection("SQLSettings"));
 
+            // ===== Add Identity ========
+            services.AddIdentity<Account, IdentityRole>()
+                .AddEntityFrameworkStores<IdentityContext>()
+                .AddDefaultTokenProviders();
+
+            services.AddTransient<IdentityContext>();
+
             // ===== Add our DbContext ========
             services.AddDbContext<IdentityContext>();
 
-            // ===== Add Identity ========
-            services.AddIdentity<IdentityUser, IdentityRole>()
-                .AddEntityFrameworkStores<IdentityContext>()
-                .AddDefaultTokenProviders();
 
             services.AddAuthorization(options =>
             {

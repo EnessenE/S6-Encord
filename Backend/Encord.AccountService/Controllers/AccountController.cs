@@ -7,6 +7,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Encord.AccountService.Models;
+using Encord.Common.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -20,13 +21,13 @@ namespace Encord.AccountService.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<Account> _signInManager;
+        private readonly UserManager<Account> _userManager;
         private readonly IConfiguration _configuration;
 
         public AccountController(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager,
+            UserManager<Account> userManager,
+            SignInManager<Account> signInManager,
             IConfiguration configuration)
         {
             _userManager = userManager;
@@ -54,7 +55,7 @@ namespace Encord.AccountService.Controllers
         [HttpPost, Route("register")]
         public async Task<object> Register(RegisterDto model)
         {
-            var user = new IdentityUser
+            var user = new Account
             {
                 UserName = model.UserName,
                 Email = model.Email
@@ -83,7 +84,7 @@ namespace Encord.AccountService.Controllers
 
         [Authorize]
         [HttpGet]
-        public async Task<IdentityUser> getuser()
+        public async Task<Account> getuser()
         {
             var id = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var currentUser = await _userManager.FindByIdAsync(id);
@@ -97,7 +98,7 @@ namespace Encord.AccountService.Controllers
         }
 
 
-        private async Task<string> GenerateJwtToken(string userName, IdentityUser user)
+        private async Task<string> GenerateJwtToken(string userName, Account user)
         {
             var claims = new List<Claim>
             {
