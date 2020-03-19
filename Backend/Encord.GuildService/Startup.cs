@@ -4,6 +4,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Encord.Common.Configuration;
 using Encord.GuildService.Context;
 using Encord.GuildService.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -34,7 +35,7 @@ namespace Encord.GuildService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<IGuildContext, GuildContext>();
+            services.Configure<SQLSettings>(Configuration.GetSection("SQLSettings"));
 
             services.AddLogging(loggingBuilder => loggingBuilder.AddSerilog(dispose: true));
 
@@ -87,6 +88,10 @@ namespace Encord.GuildService
                     ClockSkew = TimeSpan.Zero // remove delay of token when expire
                 };
             });
+
+            services.AddTransient<IGuildContext, GuildContext>();
+
+
             services.AddControllers();
         }
 
