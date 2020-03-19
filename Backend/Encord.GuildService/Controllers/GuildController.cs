@@ -3,25 +3,56 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Encord.Common;
+using Encord.GuildService.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Encord.GuildService.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     [Authorize]
     public class GuildController : ControllerBase
     {
-        public Guild GetGuild()
+        private IGuildContext _guildContext;
+
+        public GuildController(IGuildContext guildContext)
+        {
+            _guildContext = guildContext;
+        }
+
+        /// <summary>
+        /// Retrieve all guilds
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<Guild> GetGuildAsync(string id)
+        {
+            return await _guildContext.GetGuild(id);
+        }
+
+        /// <summary>
+        /// Retrieve guilds the user is connected to
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("user")]
+        public List<Guild> GetUserGuilds()
         {
             throw new NotImplementedException();
         }
 
-        public Guild CreateGuild()
+        /// <summary>
+        /// Create a guild
+        /// </summary>
+        /// <param name="newGuild"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<Guild> CreateGuild(Guild newGuild)
         {
-            throw new NotImplementedException();
+            return await _guildContext.CreateGuild(newGuild);
         }
+
     }
 }
