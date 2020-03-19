@@ -10,6 +10,5 @@ namespace Encord.Common.Models
         public string UserTag { get; set; }
 
         public DateTime JoinDate { get; set; }
-        public int test { get; set; }
     }
 }
