@@ -58,7 +58,8 @@ namespace Encord.AccountService.Controllers
             var user = new Account
             {
                 UserName = model.UserName,
-                Email = model.Email
+                Email = model.Email,
+                JoinDate = DateTime.Now
             };
             var result = await _userManager.CreateAsync(user, model.Password);
 
@@ -70,7 +71,7 @@ namespace Encord.AccountService.Controllers
 
             throw new ApplicationException("UNKNOWN_ERROR");
         }
-        
+
         [Authorize]
         [HttpPut("email")]
         public async Task<string> ChangeEmail(string newEmail)
@@ -87,12 +88,15 @@ namespace Encord.AccountService.Controllers
         public async Task<Account> getuser()
         {
             var id = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
             var currentUser = await _userManager.FindByIdAsync(id);
-
+            if (currentUser != null)
+            {
 #warning move to [jsonignore]
-            currentUser.PasswordHash = null;
-            currentUser.SecurityStamp = null;
+                currentUser.PasswordHash = null;
+                currentUser.SecurityStamp = null;
 
+            }
 
             return currentUser;
         }
