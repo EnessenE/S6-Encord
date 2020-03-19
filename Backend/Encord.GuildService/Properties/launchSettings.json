@@ -1,19 +1,11 @@
 ﻿{
   "$schema": "http://json.schemastore.org/launchsettings.json",
-  "iisSettings": {
-    "windowsAuthentication": false,
-    "anonymousAuthentication": true,
-    "iisExpress": {
-      "applicationUrl": "http://localhost:51663",
-      "sslPort": 44378
-    }
-  },
   "profiles": {
     "Encord.GuildService": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",
-      "applicationUrl": "https://localhost:5001;http://localhost:5000",
+      "applicationUrl": "https://localhost:7021;http://localhost:7020",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

@@ -1,0 +1,43 @@
+﻿{
+  "ReRoutes": [
+    {
+      "DownstreamPathTemplate": "/account/{catchAll}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7011
+        }
+      ],
+      "UpstreamPathTemplate": "/account/{catchAll}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete", "Options" ]
+    },
+    {
+      "DownstreamPathTemplate": "/role/{catchAll}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7011
+        }
+      ],
+      "UpstreamPathTemplate": "/role/{catchAll}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete", "Options" ]
+    },
+    {
+      "DownstreamPathTemplate": "/guild/{catchAll}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7021
+        }
+      ],
+      "UpstreamPathTemplate": "/guild/{catchAll}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete", "Options" ]
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:7000"
+  }
+}

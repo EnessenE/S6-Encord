@@ -71,7 +71,7 @@ namespace Encord.AccountService.Controllers
         }
         
         [Authorize]
-        [HttpPost("changeemail")]
+        [HttpPut("email")]
         public async Task<string> ChangeEmail(string newEmail)
         {
             var id = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
