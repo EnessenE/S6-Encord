@@ -28,7 +28,7 @@ namespace Encord.AccountService.Controllers
         /// Add a role to the specific user
         /// </summary>
         /// <param name="roleName"></param>
-        /// <returns>If it has completed succesfully, a new JWT token has to be generated for the authorization to fully work</returns>
+        /// <returns>If it has completed successfully, a new JWT token has to be generated for the authorization to fully work</returns>
         [Authorize(Roles = "Administrator, RoleAdministrator")]
         [HttpPost, Route("add")]
         public async Task<string> AddRoleToUser(string userid, string roleName)
