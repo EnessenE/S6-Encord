@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Encord.Common.Models;
-using Microsoft.AspNetCore.Identity;
 
-namespace Encord.Common
+namespace Encord.Common.Models
 {
     public class Guild
     {
