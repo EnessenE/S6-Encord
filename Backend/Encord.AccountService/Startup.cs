@@ -60,7 +60,7 @@ namespace Encord.AccountService
             services.Configure<SQLSettings>(Configuration.GetSection("SQLSettings"));
 
             // ===== Add Identity ========
-            services.AddIdentity<Account, IdentityRole>()
+            services.AddIdentity<Account, Role>()
                 .AddEntityFrameworkStores<IdentityContext>()
                 .AddDefaultTokenProviders();
 

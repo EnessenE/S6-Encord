@@ -16,9 +16,9 @@ namespace Encord.AccountService.Controllers
     public class RoleController : ControllerBase
     {
         private readonly UserManager<Account> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly RoleManager<Role> _roleManager;
 
-        public RoleController(UserManager<Account> userManager, RoleManager<IdentityRole> roleManager)
+        public RoleController(UserManager<Account> userManager, RoleManager<Role> roleManager)
         {
             _userManager = userManager;
             _roleManager = roleManager;
@@ -51,7 +51,7 @@ namespace Encord.AccountService.Controllers
         {
             if (!(await _roleManager.RoleExistsAsync(roleName)))
             {
-                var role = new IdentityRole();
+                var role = new Role();
                 role.Name = roleName;
                 await _roleManager.CreateAsync(role);
                 return "created!";
@@ -82,7 +82,7 @@ namespace Encord.AccountService.Controllers
         /// <returns></returns>
         [Authorize(Roles = "Administrator, RoleAdministrator")]
         [HttpGet("all")]
-        public async Task<List<IdentityRole>> GetAllRoles()
+        public async Task<List<Role>> GetAllRoles()
         {
             var roleList = _roleManager.Roles.ToList();
             return roleList;

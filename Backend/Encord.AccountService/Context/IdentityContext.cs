@@ -7,7 +7,7 @@ using Microsoft.Extensions.Options;
 
 namespace Encord.AccountService.Context
 {
-    public class IdentityContext : IdentityDbContext<Account>
+    public class IdentityContext : IdentityDbContext<Account, Role, string>
     {
         private readonly string _connectionString;
         private ILogger<IdentityContext> _logger;
