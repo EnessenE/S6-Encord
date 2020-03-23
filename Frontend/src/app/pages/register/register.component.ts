@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { environment } from 'src/environments/environment';
-import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/AuthService/auth.service';
+import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css']
 })
-export class LoginComponent implements OnInit {
-  loginForm: FormGroup;
+export class RegisterComponent implements OnInit {
+  registerForm: FormGroup;
   errorText: string;
   submitted = false;
 
@@ -19,9 +19,10 @@ export class LoginComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    this.loginForm = this.formBuilder.group({
+    this.registerForm = this.formBuilder.group({
       userName: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(environment.settings.minimalpasswordlength)]]
+      password: ['', [Validators.required, Validators.minLength(environment.settings.minimalpasswordlength)]],
+      email: ['', Validators.required]
     });
 
     if (this.accountService.tokenExistsAndValid()) {
@@ -34,7 +35,7 @@ export class LoginComponent implements OnInit {
   }
 
   // convenience getter for easy access to form fields
-  get f() { return this.loginForm.controls; }
+  get f() { return this.registerForm.controls; }
 
   RouteToDash() {
     this.router.navigate(['./dashboard']);
@@ -44,13 +45,13 @@ export class LoginComponent implements OnInit {
     this.submitted = true;
 
     // stop here if form is invalid
-    if (this.loginForm.invalid) {
+    if (this.registerForm.invalid) {
       this.submitted = false;
       this.errorText = "Please fill all fields"
       return;
     }
 
-    this.accountService.login(this.loginForm.value).subscribe(
+    this.accountService.register(this.registerForm.value).subscribe(
       data => {
         this.submitted = false;
         this.accountService.setToken(data.token);
@@ -58,14 +59,13 @@ export class LoginComponent implements OnInit {
       },
       error => {
         if (error.status == 401) {
-          this.errorText = "Login failed. Wrong credentials."
+          this.errorText = "Registration failed. Wrong credentials."
         }
         else {
           console.error(error);
-          this.errorText = "Login currently isn't available."
+          this.errorText = "Registration currently isn't available."
         }
         this.submitted = false;
       });
   }
-
 }

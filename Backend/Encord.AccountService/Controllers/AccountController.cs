@@ -53,12 +53,12 @@ namespace Encord.AccountService.Controllers
         }
 
         [HttpPost, Route("register")]
-        public async Task<object> Register(RegisterDto model)
+        public async Task<LoginDto> Register(RegisterDto model)
         {
             var user = new Account
             {
-                UserName = model.UserName,
                 Email = model.Email,
+                UserName = model.UserName,
                 JoinDate = DateTime.Now
             };
             var result = await _userManager.CreateAsync(user, model.Password);
@@ -66,7 +66,12 @@ namespace Encord.AccountService.Controllers
             if (result.Succeeded)
             {
                 await _signInManager.SignInAsync(user, false);
-                return await GenerateJwtToken(model.Email, user);
+                LoginDto login = new LoginDto()
+                {
+                    Username = user.UserName,
+                    Token = await GenerateJwtToken(model.Email, user)
+                };
+                return login;
             }
 
             throw new ApplicationException("UNKNOWN_ERROR");
@@ -80,12 +85,12 @@ namespace Encord.AccountService.Controllers
             var currentUser = await _userManager.FindByIdAsync(id);
             currentUser.Email = newEmail;
             await _userManager.UpdateAsync(currentUser); //For the whole user you can just call updateasync
-            return "wooloo";
+            return "Success";
         }
 
         [Authorize]
         [HttpGet]
-        public async Task<Account> getuser()
+        public async Task<Account> GetUser()
         {
             var id = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 

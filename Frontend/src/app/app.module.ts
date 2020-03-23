@@ -15,6 +15,7 @@ import { GuildviewComponent } from './parts/guildview/guildview.component';
 import { ChannelsComponent } from './parts/channels/channels.component';
 import { ChatviewComponent } from './parts/chatview/chatview.component';
 import { TopbarComponent } from './parts/topbar/topbar.component';
+import { RegisterComponent } from './pages/register/register.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { TopbarComponent } from './parts/topbar/topbar.component';
     GuildviewComponent,
     ChannelsComponent,
     ChatviewComponent,
-    TopbarComponent
+    TopbarComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

@@ -16,6 +16,10 @@ export class AuthenticationService {
     return this.http.post<Account>(environment.api_base + `/account/login`, account);
   }
 
+  public register(account): Observable<Account> {
+    return this.http.post<Account>(environment.api_base + `/account/register`, account);
+  }
+
   getTokenExpirationDate(token: string): Date {
     const decoded = jwt_decode(token);
 
