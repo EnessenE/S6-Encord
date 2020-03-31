@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Encord.AccountService", "En
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Encord.GuildService", "Encord.GuildService\Encord.GuildService.csproj", "{93FCC9B9-12C7-4C14-ABF2-8F5E76248BF6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Encord.APIGateway", "Encord.APIGateway\Encord.APIGateway.csproj", "{F887737F-A4CD-42DE-B8A3-22CB83EAF015}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Encord.APIGateway", "Encord.APIGateway\Encord.APIGateway.csproj", "{F887737F-A4CD-42DE-B8A3-22CB83EAF015}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{5A554487-0B19-4558-B018-39BCEC8BE9DA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{F887737F-A4CD-42DE-B8A3-22CB83EAF015}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F887737F-A4CD-42DE-B8A3-22CB83EAF015}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F887737F-A4CD-42DE-B8A3-22CB83EAF015}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A554487-0B19-4558-B018-39BCEC8BE9DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A554487-0B19-4558-B018-39BCEC8BE9DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A554487-0B19-4558-B018-39BCEC8BE9DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A554487-0B19-4558-B018-39BCEC8BE9DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+  encord.accountservice:
+    image: ${DOCKER_REGISTRY-}encordaccountservice
+    build:
+      context: .
+      dockerfile: Encord.AccountService/Dockerfile
+
+  encord.guildservice:
+    image: ${DOCKER_REGISTRY-}encordguildservice
+    build:
+      context: .
+      dockerfile: Encord.GuildService/Dockerfile
+
+
+  encord.apigateway:
+    image: ${DOCKER_REGISTRY-}encordapigateway
+    build:
+      context: .
+      dockerfile: Encord.APIGateway/Dockerfile
+
