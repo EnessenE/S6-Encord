@@ -24,7 +24,7 @@ spec:
         io.kompose.service: encord-apigateway
     spec:
       containers:
-      - image: encordapigateway
+      - image: enes1/encordapigateway
         imagePullPolicy: ""
         name: encord-apigateway
         resources: {}

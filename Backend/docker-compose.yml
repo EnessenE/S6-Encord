@@ -2,20 +2,20 @@ version: '3.4'
 
 services:
   encord.accountservice:
-    image: ${DOCKER_REGISTRY-}encordaccountservice
+    image: enes1/encordaccountservice
     build:
       context: .
       dockerfile: Encord.AccountService/Dockerfile
 
   encord.guildservice:
-    image: ${DOCKER_REGISTRY-}encordguildservice
+    image: enes1/encordguildservice
     build:
       context: .
       dockerfile: Encord.GuildService/Dockerfile
 
 
   encord.apigateway:
-    image: ${DOCKER_REGISTRY-}encordapigateway
+    image: enes1/encordapigateway
     build:
       context: .
       dockerfile: Encord.APIGateway/Dockerfile

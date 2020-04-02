@@ -24,7 +24,7 @@ spec:
         io.kompose.service: encord-guildservice
     spec:
       containers:
-      - image: encordguildservice
+      - image: enes1/encordguildservice
         imagePullPolicy: ""
         name: encord-guildservice
         resources: {}
