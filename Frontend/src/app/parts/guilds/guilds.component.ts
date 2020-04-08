@@ -3,6 +3,7 @@ import { Guild } from 'src/app/models/guild';
 import { GuildService } from 'src/app/services/GuildService/guild.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CreateguildComponent } from '../createguild/createguild.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-guilds',
@@ -12,7 +13,9 @@ import { CreateguildComponent } from '../createguild/createguild.component';
 export class GuildsComponent implements OnInit {
   guilds: Guild[]
 
-  constructor(private guildService: GuildService, private dialog: MatDialog) { }
+  constructor(private guildService: GuildService, 
+    private dialog: MatDialog,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.loadAllGuilds();
@@ -29,6 +32,7 @@ export class GuildsComponent implements OnInit {
   }
 
   onSelect(guild: Guild) {
+    this.router.navigate(['./guild', guild.id]);
     console.log("Trying to open: " + guild.name)
   }
 
@@ -41,7 +45,6 @@ export class GuildsComponent implements OnInit {
     dialogConfig.height = '600px';
     
     let dialogRef = this.dialog.open(CreateguildComponent, dialogConfig);
-
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
       this.loadAllGuilds()
