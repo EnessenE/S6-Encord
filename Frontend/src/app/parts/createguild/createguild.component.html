@@ -1,1 +1,17 @@
-<p>createguild works!</p>
+<form [formGroup]="guildForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label>Guild</label>
+        <input type="text" formControlName="name" class="form-control" placeholder="CreativeGuildname"
+            [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+        <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+            <div *ngIf="f.name.errors.required">A guild name is required</div>
+        </div>
+    </div>
+    <ng-template [ngIf]="errorText">
+        <div class="alert alert-danger" role="alert">
+            {{errorText}}
+        </div>
+    </ng-template>
+    <button mat-button class="btn btn-primary" mat-dialog-close>Cancel</button>
+    <button mat-button type="submit" class="btn btn-primary">Submit</button>
+</form>

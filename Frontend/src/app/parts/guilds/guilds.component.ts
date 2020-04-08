@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Guild } from 'src/app/models/guild';
 import { GuildService } from 'src/app/services/GuildService/guild.service';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { CreateguildComponent } from '../createguild/createguild.component';
 
 @Component({
   selector: 'app-guilds',
@@ -10,9 +12,13 @@ import { GuildService } from 'src/app/services/GuildService/guild.service';
 export class GuildsComponent implements OnInit {
   guilds: Guild[]
 
-  constructor(private guildService: GuildService) { }
+  constructor(private guildService: GuildService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.loadAllGuilds();
+  }
+
+  loadAllGuilds(){
     this.guildService.getAllGuilds().subscribe(
       data => {
         this.guilds = data;
@@ -25,4 +31,24 @@ export class GuildsComponent implements OnInit {
   onSelect(guild: Guild) {
     console.log("Trying to open: " + guild.name)
   }
+
+  CreateGuild(){
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '400px';
+    dialogConfig.height = '600px';
+    
+    let dialogRef = this.dialog.open(CreateguildComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+      this.loadAllGuilds()
+      if (result != undefined){
+        this.onSelect(result);
+      }
+    });
+  }
+
 }

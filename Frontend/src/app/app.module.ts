@@ -17,6 +17,8 @@ import { ChatviewComponent } from './parts/chatview/chatview.component';
 import { TopbarComponent } from './parts/topbar/topbar.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { CreateguildComponent } from './parts/createguild/createguild.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { CreateguildComponent } from './parts/createguild/createguild.component'
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDialogModule,
+    BrowserAnimationsModule
   ],
   providers: [
     AuthenticationService,

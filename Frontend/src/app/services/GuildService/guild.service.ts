@@ -23,4 +23,8 @@ export class GuildService {
   public getAllGuilds(): Observable<Guild[]> {
     return this.http.get<Guild[]>(environment.api_base + `/guild/`, { headers: this.getHeaders()});
   }
+
+  public createGuild(guild: Guild): Observable<Guild> {
+    return this.http.post<Guild>(environment.api_base + `/guild/`, guild, { headers: this.getHeaders()});
+  }
 }

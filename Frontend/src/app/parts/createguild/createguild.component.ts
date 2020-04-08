@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { environment } from 'src/environments/environment';
+import { GuildService } from 'src/app/services/GuildService/guild.service';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-createguild',
@@ -6,20 +10,34 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./createguild.component.css']
 })
 export class CreateguildComponent implements OnInit {
+  errorText: string;
+  guildForm: FormGroup;
+  submitted: boolean;
 
-  constructor() { }
+  constructor(private formBuilder: FormBuilder,
+    private guildService: GuildService,
+    public dialogRef: MatDialogRef<CreateguildComponent>) { }
 
   ngOnInit(): void {
+    this.guildForm = this.formBuilder.group({
+      name: ['', Validators.required],
+    });
   }
 
-  CreateGuild(){
-    let dialogRef = dialog.open(CreateguildComponent, {
-      height: '400px',
-      width: '600px',
-    });
+  get f() { return this.guildForm.controls; }
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`); // Pizza!
-    });
+  onSubmit(){
+    this.guildService.createGuild(this.guildForm.value).subscribe(
+      data => {
+        this.close(data);
+      },
+      error => {
+        this.errorText = error;
+      });
+    this.close(null);
+  }
+
+  close(sendBack): void {
+    this.dialogRef.close(sendBack);
   }
 }
