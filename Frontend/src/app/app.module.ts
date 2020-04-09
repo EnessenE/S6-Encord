@@ -19,6 +19,10 @@ import { RegisterComponent } from './pages/register/register.component';
 import { CreateguildComponent } from './parts/createguild/createguild.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule} from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
@@ -41,7 +45,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     AppRoutingModule,
     ReactiveFormsModule,
     MatDialogModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
   providers: [
     AuthenticationService,

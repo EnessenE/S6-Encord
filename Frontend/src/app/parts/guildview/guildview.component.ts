@@ -12,25 +12,28 @@ export class GuildviewComponent implements OnInit {
   guild: Guild;
 
   constructor(private route: ActivatedRoute,
-    private guildService: GuildService, 
+    private guildService: GuildService,
     private router: Router) { }
 
   ngOnInit(): void {
     this.getGuild()
       this.router.events.subscribe((val) => {
-        getGuild();
+        this.getGuild();
     });
   }
 
-  getGuild(){
-    const id = this.route.snapshot.paramMap.get('id');
-    this.guildService.getGuild(id).subscribe(
-      data => {
-        this.guild = data;
-      },
-      error => {
-        console.error(error);
-      });
+  getGuild() {
+    const id = +this.route.snapshot.paramMap.get('id');
+    if (!this.guild || this.guild.id != id.toString()) {
+      this.guildService.getGuild(id.toString()).subscribe(
+        data => {
+          console.debug("got data")
+          this.guild = data;
+        },
+        error => {
+          console.error(error);
+        });
+    }
   }
 
 }
