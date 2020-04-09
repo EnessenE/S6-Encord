@@ -4,14 +4,16 @@ using Encord.ChannelService.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Encord.ChannelService.Migrations
 {
     [DbContext(typeof(ChannelContext))]
-    partial class ChannelContextModelSnapshot : ModelSnapshot
+    [Migration("20200409130937_Addcreationdate")]
+    partial class Addcreationdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
