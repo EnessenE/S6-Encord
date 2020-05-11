@@ -5,6 +5,7 @@ import { ChannelService } from 'src/app/services/ChannelService/channel.service'
 import { Guild } from 'src/app/models/guild';
 import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
 import { CreatechannelComponent } from '../createchannel/createchannel.component';
+import { faCoffee, faHeadphonesAlt, faAlignLeft } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-channels',
@@ -14,6 +15,8 @@ import { CreatechannelComponent } from '../createchannel/createchannel.component
 export class ChannelsComponent implements OnInit {
   channels: Channel[];
   currentId;
+  faHeadphonesAlt = faHeadphonesAlt;
+  faAlignLeft = faAlignLeft;
 
   constructor(private route: ActivatedRoute,
     private channelService: ChannelService,
