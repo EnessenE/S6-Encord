@@ -27,14 +27,20 @@ export class CreateguildComponent implements OnInit {
   get f() { return this.guildForm.controls; }
 
   onSubmit(){
-    this.guildService.createGuild(this.guildForm.value).subscribe(
-      data => {
-        this.close(data);
-      },
-      error => {
-        this.errorText = error;
-      });
-    this.close(null);
+    this.submitted = true
+    if (this.guildForm.valid){
+      this.guildService.createGuild(this.guildForm.value).subscribe(
+        data => {
+          this.close(data);
+        },
+        error => {
+          this.errorText = error;
+        });
+      this.close(null);
+      }
+    else{
+      return false;
+    }
   }
 
   close(sendBack): void {

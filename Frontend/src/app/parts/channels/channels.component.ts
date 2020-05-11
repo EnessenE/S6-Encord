@@ -39,11 +39,11 @@ export class ChannelsComponent implements OnInit {
       });
   }
 
-  onSelect(channel: Channel){
+  onSelect(channel: Channel) {
     console.log("click " + channel.name);
   }
-  
-  CreateChannel(){
+
+  CreateChannel() {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = false;
@@ -51,14 +51,14 @@ export class ChannelsComponent implements OnInit {
     dialogConfig.width = '400px';
     dialogConfig.height = '600px';
     dialogConfig.data = this.currentId;
-    
+
     let dialogRef = this.dialog.open(CreatechannelComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
       this.getChannels()
-      if (result != undefined){
+      if (result) {
         this.onSelect(result);
       }
-    });  }
+    });
+  }
 
 }

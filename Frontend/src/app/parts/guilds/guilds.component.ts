@@ -46,9 +46,8 @@ export class GuildsComponent implements OnInit {
     
     let dialogRef = this.dialog.open(CreateguildComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
       this.loadAllGuilds()
-      if (result != undefined){
+      if (result){
         this.onSelect(result);
       }
     });
