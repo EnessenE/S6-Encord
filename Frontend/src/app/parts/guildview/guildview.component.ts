@@ -10,6 +10,7 @@ import { Guild } from 'src/app/models/guild';
 })
 export class GuildviewComponent implements OnInit {
   guild: Guild;
+  currentSearchId;
 
   constructor(private route: ActivatedRoute,
     private guildService: GuildService,
@@ -23,9 +24,11 @@ export class GuildviewComponent implements OnInit {
   }
 
   getGuild() {
-    const id = +this.route.snapshot.paramMap.get('id');
-    if (!this.guild || this.guild.id != id.toString()) {
-      this.guildService.getGuild(id.toString()).subscribe(
+    const id = (+this.route.snapshot.paramMap.get('id')).toString();
+    if (this.currentSearchId != id) {
+      this.currentSearchId = id;
+      this.guild = null;
+      this.guildService.getGuild(id).subscribe(
         data => {
           console.debug("got data")
           this.guild = data;

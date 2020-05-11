@@ -9,7 +9,7 @@ namespace Encord.ChannelService.Migrations
         {
             migrationBuilder.AddColumn<DateTime>(
                 name: "CreatedDate",
-                table: "Assets",
+                table: "Channels",
                 nullable: false,
                 defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
         }
@@ -18,7 +18,7 @@ namespace Encord.ChannelService.Migrations
         {
             migrationBuilder.DropColumn(
                 name: "CreatedDate",
-                table: "Assets");
+                table: "Channels");
         }
     }
 }

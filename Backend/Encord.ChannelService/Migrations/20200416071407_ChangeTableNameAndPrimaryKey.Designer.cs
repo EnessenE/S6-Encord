@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Encord.ChannelService.Migrations
 {
     [DbContext(typeof(ChannelContext))]
-    [Migration("20200409130937_Addcreationdate")]
-    partial class Addcreationdate
+    [Migration("20200416071407_ChangeTableNameAndPrimaryKey")]
+    partial class ChangeTableNameAndPrimaryKey
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,6 +24,7 @@ namespace Encord.ChannelService.Migrations
             modelBuilder.Entity("Encord.Common.Models.Channel", b =>
                 {
                     b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreatedDate")

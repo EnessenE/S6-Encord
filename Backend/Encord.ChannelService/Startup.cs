@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Encord.ChannelService.Context;
+using Encord.ChannelService.Interfaces;
 using Encord.Common.Configuration;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -91,10 +93,14 @@ namespace Encord.ChannelService
                 };
             });
 
-           // services.AddTransient<IGuildContext, GuildContext>();
+            services.AddTransient<IChannelContext, ChannelContext>();
 
 
-            services.AddControllers();
+            services.AddControllers().AddJsonOptions(options => {
+                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                options.JsonSerializerOptions.IgnoreNullValues = true;
+            });
+            ;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

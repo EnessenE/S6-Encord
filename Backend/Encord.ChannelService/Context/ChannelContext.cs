@@ -4,6 +4,7 @@ using Encord.ChannelService.Interfaces;
 using Encord.Common.Configuration;
 using Encord.Common.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
@@ -12,7 +13,7 @@ namespace Encord.ChannelService.Context
     public class ChannelContext : DbContext, IChannelContext
     {
         private readonly IOptions<SQLSettings> _sqlSettings;
-        public DbSet<Channel> Assets { get; set; }
+        public DbSet<Channel> Channels { get; set; }
 
         public ChannelContext(IOptions<SQLSettings> _SqlSettings, ILogger<ChannelContext> logger)
         {
@@ -25,7 +26,7 @@ namespace Encord.ChannelService.Context
 
         public Channel GetChannel(string id)
         {
-            Channel asset = Assets
+            Channel asset = Channels
                 .OrderBy(b => b.Id)
                 .First();
             return asset;
@@ -33,7 +34,9 @@ namespace Encord.ChannelService.Context
 
         public List<Channel> GetAllChannelsInGuild(string guildId)
         {
-            throw new System.NotImplementedException();
+            var x = Channels.Where(x => x.GuildID == guildId); 
+            return x.ToList();
+
         }
 
         public Channel CreateChannel(Channel channel)

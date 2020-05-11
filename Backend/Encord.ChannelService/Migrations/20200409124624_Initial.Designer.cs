@@ -36,7 +36,7 @@ namespace Encord.ChannelService.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Assets");
+                    b.ToTable("Channels");
                 });
 #pragma warning restore 612, 618
         }

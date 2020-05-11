@@ -15,7 +15,7 @@ namespace Encord.ChannelService.Controllers
     [Authorize]
     public class ChannelController : ControllerBase
     {
-        public IChannelContext _channelContext;
+        private readonly IChannelContext _channelContext;
 
         public ChannelController(IChannelContext channelContext)
         {
@@ -28,7 +28,7 @@ namespace Encord.ChannelService.Controllers
             return _channelContext.GetChannel(id);
         }
 
-        [HttpGet("/guild/{guildId}")]
+        [HttpGet("guild/{guildId}")]
         public List<Channel> GetAllChannelsInGuild(string guildId)
         {
             return _channelContext.GetAllChannelsInGuild(guildId);

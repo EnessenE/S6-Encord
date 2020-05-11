@@ -22,6 +22,7 @@ namespace Encord.ChannelService.Migrations
             modelBuilder.Entity("Encord.Common.Models.Channel", b =>
                 {
                     b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreatedDate")
@@ -38,7 +39,7 @@ namespace Encord.ChannelService.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Assets");
+                    b.ToTable("Channels");
                 });
 #pragma warning restore 612, 618
         }

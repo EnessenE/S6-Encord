@@ -1,1 +1,18 @@
-<p>channels works!</p>
+<a *ngFor="let channel of channels" (click)="onSelect(channel)">
+    <div class="channel">
+        <div class="table">
+            <div class="table-cell">
+                {{channel.name}}
+            </div>
+        </div>
+    </div>
+</a>
+<a>
+    <div class="guild" (click)="CreateChannel()">
+        <div class="table">
+            <div class="table-cell">
+                Create a channel
+            </div>
+        </div>
+    </div>
+</a>
