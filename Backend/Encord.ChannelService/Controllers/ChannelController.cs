@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Encord.ChannelService.Interfaces;
+using Encord.Common.Enums;
 using Encord.Common.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -32,6 +33,12 @@ namespace Encord.ChannelService.Controllers
         public List<Channel> GetAllChannelsInGuild(string guildId)
         {
             return _channelContext.GetAllChannelsInGuild(guildId);
+        }
+
+        [HttpGet("types")]
+        public List<string> GetTypes()
+        {
+            return Enum.GetNames(typeof(ChannelType)).ToList();
         }
 
         [HttpPost]

@@ -31,4 +31,10 @@ export class ChannelService {
   public createChannel(data: Channel): Observable<Channel> {
     return this.http.post<Channel>(environment.api_base + `/channel/`, data, { headers: this.getHeaders() });
   }
+
+  public getAllChannelTypes(): Observable<string[]> {
+    return this.http.get<string[]>(environment.api_base + `/channel/types`, { headers: this.getHeaders() });
+  }
+
+  
 }

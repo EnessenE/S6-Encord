@@ -15,6 +15,7 @@ import { Channel } from 'src/app/models/channel';
 export class CreatechannelComponent implements OnInit {
   errorText: string;
   guildForm: FormGroup;
+  channelTypes: string[];
   submitted: boolean;
 
    //currently simply the guildid
@@ -28,23 +29,37 @@ export class CreatechannelComponent implements OnInit {
   ngOnInit(): void {
     this.guildForm = this.formBuilder.group({
       name: ['', Validators.required],
+      type: ['', Validators.required]
     });
+
+    this.channelService.getAllChannelTypes().subscribe(
+      data => {
+        this.channelTypes = data;
+      })
   }
 
   get f() { return this.guildForm.controls; }
 
   onSubmit() {
+    this.submitted = true
+    
     var channel = this.guildForm.value as Channel;
     channel.guildID = this.data.toString();
-    channel.type = "TextChannel";
-    this.channelService.createChannel(this.guildForm.value).subscribe(
-      data => {
-        this.close(data);
-      },
-      error => {
-        this.errorText = error;
-      });
-    this.close(null);
+    if (this.guildForm.valid) {
+      this.channelService.createChannel(this.guildForm.value).subscribe(
+        data => {
+          this.close(data);
+        },
+        error => {
+          this.errorText = error;
+        });
+      this.close(null);
+    }
+    else{
+      //this.submitted = false
+      return false;
+    }
+    //this.submitted = false
   }
 
   close(sendBack): void {
