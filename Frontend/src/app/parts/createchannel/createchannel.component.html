@@ -6,7 +6,7 @@
         <div *ngIf="submitted && f.name.errors" class="invalid-feedback"> 
             <div *ngIf="f.name.errors.required">A channel name is required</div>
         </div>
-
+        
         <select formControlName="type">
             <option value="" disabled>Choose your channel type</option>
             <option *ngFor="let r of channelTypes" [value]="r">

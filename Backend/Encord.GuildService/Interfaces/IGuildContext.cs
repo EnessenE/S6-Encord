@@ -9,10 +9,12 @@ namespace Encord.GuildService.Interfaces
 {
     public interface IGuildContext
     {
-        Task<Guild> GetGuild(string id);
-        Task<List<Guild>> GetAllGuilds();
+        Guild GetGuild(string id);
+        List<Guild> GetAllGuilds();
 
-        Task<List<Guild>> GetUserGuilds(string userId);
-        Task<Guild> CreateGuild(Guild guild);
+        List<Guild> GetUserGuilds(string userId);
+        Guild CreateGuild(Guild guild);
+        bool DeleteGuild(Guild guild);
+
     }
 }

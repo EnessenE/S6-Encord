@@ -5,65 +5,65 @@ using System.Linq;
 using System.Threading.Tasks;
 using Encord.Common;
 using Encord.Common.Configuration;
-using Encord.Common.Extensions;
 using Encord.Common.Models;
 using Encord.GuildService.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
 namespace Encord.GuildService.Context
 {
-    public class GuildContext : SqlDbContext, IGuildContext
+    public class GuildContext : DbContext, IGuildContext
     {
-        public GuildContext(IOptions<SQLSettings> _SqlSettings, ILogger<SqlDbContext> logger) : base(_SqlSettings, logger)
+        private readonly IOptions<SQLSettings> _sqlSettings;
+        private readonly ILogger<GuildContext> _logger;
+        public DbSet<Guild> Guilds { get; set; }
+
+        public GuildContext(IOptions<SQLSettings> _SqlSettings, ILogger<GuildContext> logger)
         {
+            _sqlSettings = _SqlSettings;
+            _logger = logger;
+        }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(_sqlSettings.Value.ConnectionString);
         }
 
-        public async Task<Guild> GetGuild(string id)
+        public Guild GetGuild(string id)
         {
-            SqlCommand cmd = new SqlCommand();
-            cmd.Parameters.AddWithValue("@Id", id);
-            var data = await GetDataAsync("GetGuildOnId", cmd);
-            Guild result = null;
-            if (data.HasData())
+            var result = Guilds.Where(a => a.Id == id);
+            Guild guild = null;
+            if (result.Any())
             {
-                result = data.Tables[0].Rows[0].ToGuild();
+                guild = result.First();
             }
+            return guild;
 
-            return result;
         }
 
-        public async Task<List<Guild>> GetAllGuilds()
+        public List<Guild> GetAllGuilds()
         {
-            SqlCommand cmd = new SqlCommand();
-            var data = await GetDataAsync("GetAllGuilds", cmd);
-            var result = data.Tables[0].ToGuildList();
-            return result;
+            return Guilds.ToList();
         }
 
-        public async Task<List<Guild>> GetUserGuilds(string userId)
+        public List<Guild> GetUserGuilds(string userId)
         {
-            SqlCommand cmd = new SqlCommand();
-            cmd.Parameters.AddWithValue("@Id", userId);
-            var data = await GetDataAsync("GetGuildOnUserId", cmd);
-            var result = data.Tables[0].ToGuildList();
-            return result;
+            throw new NotImplementedException();
         }
 
-        public async Task<Guild> CreateGuild(Guild guild)
+        public Guild CreateGuild(Guild guild)
         {
-            SqlCommand command = new SqlCommand();
-            command.Parameters.AddWithValue("@Name", guild.Name);
-            command.Parameters.AddWithValue("@CreationDate", guild.CreationDate);
+            guild.Id = null;
+            Add(guild);
+            SaveChanges();
+            return guild; //Id is filled by entity
+        }
 
-            var ds = await GetDataAsync("CreateGuild", command);
-            var result = new Guild();
-            if (ds.HasData())
-            {
-                result = ds.Tables[0].Rows[0].ToGuild();
-            }
-
-            return result;
+        public bool DeleteGuild(Guild guild)
+        {
+            Remove(guild);
+            SaveChanges();
+            return true;
         }
     }
 }

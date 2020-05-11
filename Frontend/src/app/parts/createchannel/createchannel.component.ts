@@ -1,8 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { GuildService } from 'src/app/services/GuildService/guild.service';
 import { MatDialogRef } from '@angular/material/dialog';
-import { CreateguildComponent } from '../createguild/createguild.component';
 import { ChannelService } from 'src/app/services/ChannelService/channel.service';
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { Channel } from 'src/app/models/channel';

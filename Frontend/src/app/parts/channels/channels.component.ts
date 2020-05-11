@@ -28,7 +28,7 @@ export class ChannelsComponent implements OnInit {
   }
 
   getChannels() {
-    const id = +this.route.snapshot.paramMap.get('id');
+    const id = this.route.snapshot.paramMap.get('id');
     this.currentId = id;
     this.channelService.getAllChannelsOnGuild(id.toString()).subscribe(
       data => {

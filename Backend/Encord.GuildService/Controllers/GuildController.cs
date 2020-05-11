@@ -28,9 +28,9 @@ namespace Encord.GuildService.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<List<Guild>> GetGuildAsync()
+        public List<Guild> GetGuild()
         {
-            return await _guildContext.GetAllGuilds();
+            return _guildContext.GetAllGuilds();
         }
 
         /// <summary>
@@ -38,9 +38,9 @@ namespace Encord.GuildService.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<Guild> GetGuildAsync(string id)
+        public Guild GetGuild(string id)
         {
-            return await _guildContext.GetGuild(id);
+            return _guildContext.GetGuild(id);
         }
 
         /// <summary>
@@ -48,9 +48,9 @@ namespace Encord.GuildService.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("user")]
-        public async Task<List<Guild>> GetUserGuilds(string userId)
+        public List<Guild> GetUserGuilds(string userId)
         {
-            return await _guildContext.GetUserGuilds(userId);
+            return _guildContext.GetUserGuilds(userId);
         }
 
         /// <summary>
@@ -59,11 +59,22 @@ namespace Encord.GuildService.Controllers
         /// <param name="newGuild"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<Guild> CreateGuild(Guild newGuild)
+        public Guild CreateGuild(Guild newGuild)
         {
             newGuild.CreationDate = DateTime.Now;
-            return await _guildContext.CreateGuild(newGuild);
+            return _guildContext.CreateGuild(newGuild);
         }
 
+        /// <summary>
+        /// Delete a guild
+        /// </summary>
+        /// <param name="newGuild"></param>
+        /// <returns></returns>
+        [HttpDelete]
+        public bool DeleteGuild(Guild newGuild)
+        {
+            newGuild.CreationDate = DateTime.Now;
+            return _guildContext.DeleteGuild(newGuild);
+        }
     }
 }

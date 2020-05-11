@@ -25,6 +25,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { CreatechannelComponent } from './parts/createchannel/createchannel.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { GuildsettingsComponent } from './parts/guildsettings/guildsettings.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     TopbarComponent,
     RegisterComponent,
     CreateguildComponent,
-    CreatechannelComponent
+    CreatechannelComponent,
+    GuildsettingsComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,9 @@
+<h1>Edit your guild here</h1>
+
+<p>ID: {{guild.id}}</p>
+<p>Full name: {{guild.name}}</p>
+<p>Created at: {{guild.creationDate}}</p>
+
+<button type="button" class="btn btn-danger" (click)="delete()"><fa-icon [icon]="faBin"></fa-icon>Delete guild</button>
+
+<button mat-button class="btn btn-primary" mat-dialog-close>Close</button>

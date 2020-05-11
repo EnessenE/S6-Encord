@@ -6,7 +6,7 @@
     <ng-template #loaded>
         <div class="col-sm-2 channels bar">
             <div class="name col-12">
-                <p>{{guild.name}}</p>
+                <a (click)="GuildSettings()">{{guild.name}}</a>
             </div>
             <app-channels></app-channels>
         </div>
