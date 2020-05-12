@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Encord.ChannelService.Context;
 using Encord.ChannelService.Enums;
 using Encord.ChannelService.Interfaces;
 using Encord.ChannelService.Models;
@@ -13,14 +14,16 @@ namespace Encord.ChannelService.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    [Authorize]
+   // [Authorize]
     public class ChannelController : ControllerBase
     {
         private readonly IChannelContext _channelContext;
+        private MessageBrokerContext _messageBroker;
 
-        public ChannelController(IChannelContext channelContext)
+        public ChannelController(IChannelContext channelContext, MessageBrokerContext messageBroker)
         {
             _channelContext = channelContext;
+            _messageBroker = messageBroker;
         }
 
         [HttpGet("{id}")]

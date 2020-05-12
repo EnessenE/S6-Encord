@@ -10,6 +10,8 @@ namespace Encord.ChannelService.Interfaces
     {
         Channel GetChannel(string id);
         List<Channel> GetAllChannelsInGuild(string guildId);
+        bool DeleteAllChannelsInGuild(string guildId);
+
         Channel CreateChannel(Channel guild);
         bool DeleteChannel(Channel channel);
     }

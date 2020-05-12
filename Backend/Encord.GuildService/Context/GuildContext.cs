@@ -56,7 +56,7 @@ namespace Encord.GuildService.Context
             guild.Id = null;
             Add(guild);
             SaveChanges();
-            return guild; //Id is filled by entity
+            return guild; //GuildId is filled by entity
         }
 
         public bool DeleteGuild(Guild guild)

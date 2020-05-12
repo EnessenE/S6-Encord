@@ -23,7 +23,7 @@ namespace Encord.ChannelService.Migrations
 
             modelBuilder.Entity("Encord.Common.Models.Channel", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<string>("GuildId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreatedDate")
@@ -38,7 +38,7 @@ namespace Encord.ChannelService.Migrations
                     b.Property<int>("Type")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("GuildId");
 
                     b.ToTable("Channels");
                 });

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using Encord.ChannelService.Context;
 using Encord.Common.Configuration;
 using Encord.GuildService.Context;
 using Encord.GuildService.Interfaces;
@@ -37,6 +38,7 @@ namespace Encord.GuildService
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<SQLSettings>(Configuration.GetSection("SQLSettings"));
+            services.Configure<MessageBrokerSettings>(Configuration.GetSection("MessageBrokerSettings"));
 
             services.AddLogging(loggingBuilder => loggingBuilder.AddSerilog(dispose: true));
 
@@ -94,7 +96,7 @@ namespace Encord.GuildService
             });
 
             services.AddTransient<IGuildContext, GuildContext>();
-
+            services.AddSingleton<MessageBrokerContext>();
 
             services.AddControllers().AddJsonOptions(options => {
                 options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
@@ -103,7 +105,8 @@ namespace Encord.GuildService
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        // MessageBrokerContext is called here so we listen to incoming requests from the messagebroker.
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, MessageBrokerContext brokerContext)
         {
             app.UseCors("MyPolicy");
 

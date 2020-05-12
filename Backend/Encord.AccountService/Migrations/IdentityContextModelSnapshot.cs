@@ -21,7 +21,7 @@ namespace Encord.AccountService.Migrations
 
             modelBuilder.Entity("Encord.Common.Models.Account", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<string>("GuildId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("AccessFailedCount")
@@ -77,7 +77,7 @@ namespace Encord.AccountService.Migrations
                     b.Property<string>("UserTag")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("GuildId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
@@ -92,7 +92,7 @@ namespace Encord.AccountService.Migrations
 
             modelBuilder.Entity("Encord.Common.Models.Role", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<string>("GuildId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -107,7 +107,7 @@ namespace Encord.AccountService.Migrations
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
 
-                    b.HasKey("Id");
+                    b.HasKey("GuildId");
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
@@ -119,7 +119,7 @@ namespace Encord.AccountService.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("GuildId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -134,7 +134,7 @@ namespace Encord.AccountService.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("Id");
+                    b.HasKey("GuildId");
 
                     b.HasIndex("RoleId");
 
@@ -143,7 +143,7 @@ namespace Encord.AccountService.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("GuildId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -158,7 +158,7 @@ namespace Encord.AccountService.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("Id");
+                    b.HasKey("GuildId");
 
                     b.HasIndex("UserId");
 

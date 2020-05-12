@@ -34,16 +34,31 @@ namespace Encord.ChannelService.Context
 
         public List<Channel> GetAllChannelsInGuild(string guildId)
         {
-            var x = Channels.Where(x => x.GuildID == guildId); 
+            var x = Channels.Where(x => x.GuildID == guildId);
             return x.ToList();
 
+        }
+
+        public bool DeleteAllChannelsInGuild(string guildId)
+        {
+            var x = Channels.Where(x => x.GuildID == guildId);
+            if (x.Any())
+            {
+                foreach (var channel in x)
+                {
+                    Remove(channel);
+                }
+            }
+
+            SaveChanges();
+            return true;
         }
 
         public Channel CreateChannel(Channel channel)
         {
             Add(channel);
             SaveChanges();
-            return channel; //Id is filled by entity
+            return channel; //GuildId is filled by entity
         }
 
         public bool DeleteChannel(Channel channel)

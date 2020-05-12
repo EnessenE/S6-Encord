@@ -23,7 +23,7 @@ namespace Encord.GuildService.Migrations
 
             modelBuilder.Entity("Encord.Common.Models.Guild", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<string>("GuildId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
@@ -33,7 +33,7 @@ namespace Encord.GuildService.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("GuildId");
 
                     b.ToTable("Guilds");
                 });
