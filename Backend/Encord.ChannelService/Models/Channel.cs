@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
-using Encord.Common.Enums;
+using Encord.ChannelService.Enums;
 
-namespace Encord.Common.Models
+namespace Encord.ChannelService.Models
 {
     public class Channel
     {

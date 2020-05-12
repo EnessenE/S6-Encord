@@ -1,5 +1,5 @@
-﻿using Encord.Common.Configuration;
-using Encord.Common.Models;
+﻿using Encord.AccountService.Models;
+using Encord.Common.Configuration;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;

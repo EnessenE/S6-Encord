@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Microsoft.AspNetCore.Identity;
 
-namespace Encord.Common.Models
+namespace Encord.AccountService.Models
 {
     public class Account : IdentityUser
     {

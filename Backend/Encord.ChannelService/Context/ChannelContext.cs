@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Encord.ChannelService.Interfaces;
+using Encord.ChannelService.Models;
 using Encord.Common.Configuration;
-using Encord.Common.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Logging;

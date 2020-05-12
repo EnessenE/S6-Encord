@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Encord.Common.Models;
+using Encord.ChannelService.Models;
 
 namespace Encord.ChannelService.Interfaces
 {

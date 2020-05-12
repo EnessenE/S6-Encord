@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Encord.ChannelService.Enums;
 using Encord.ChannelService.Interfaces;
-using Encord.Common.Enums;
-using Encord.Common.Models;
+using Encord.ChannelService.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
