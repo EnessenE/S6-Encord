@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Encord.GuildService.Migrations
 {
     [DbContext(typeof(GuildContext))]
-    [Migration("20200512122446_namechange")]
+    [Migration("20200512133613_namechange")]
     partial class namechange
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
