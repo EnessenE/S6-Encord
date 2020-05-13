@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Text;
@@ -12,12 +11,9 @@ using Encord.Common.Configuration;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using NSwag;
 using NSwag.Generation.Processors.Security;
@@ -60,20 +56,22 @@ namespace Encord.ChannelService
 
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {
-                builder.AllowAnyOrigin()
+                builder.SetIsOriginAllowed(_ => true)
                     .AllowAnyMethod()
+                    .AllowCredentials()
                     .AllowAnyHeader();
             }));
 
             // ===== Add our DbContext ========
             services.AddDbContext<ChannelContext>();
 
-            services.AddAuthorization(options =>
-            {
-                // options.
-            });
+
 
             // ===== Add Jwt Authentication ========
+            services.AddAuthorization(options =>
+            {
+            });
+
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear(); // => remove default claims
             services.AddAuthentication(options =>
             {
@@ -92,12 +90,33 @@ namespace Encord.ChannelService
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JwtKey"])),
                     ClockSkew = TimeSpan.Zero // remove delay of token when expire
                 };
+
+                cfg.Events = new JwtBearerEvents
+                {
+                    OnMessageReceived = context =>
+                    {
+                        var accessToken = context.Request.Query["access_token"];
+
+                        // If the request is for our hub...
+                        var path = context.HttpContext.Request.Path;
+                        if (!string.IsNullOrEmpty(accessToken) &&
+                            (path.StartsWithSegments("/ws")))
+                        {
+                            // Read the token out of the query string
+                            context.Token = accessToken;
+                        }
+                        return Task.CompletedTask;
+                    }
+                };
             });
 
+            //Add iniatiable classes
             services.AddTransient<IChannelContext, ChannelContext>();
             services.AddTransient<MessageHandler>();
             services.AddSingleton<MessageBrokerContext>();
 
+            //Add websockets
+            services.AddSignalR();
 
             services.AddControllers().AddJsonOptions(options => {
                 options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
@@ -125,10 +144,11 @@ namespace Encord.ChannelService
 
             app.UseOpenApi();
             app.UseSwaggerUi3();
-
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<ChatHub>("ws/chat");
             });
         }
     }
