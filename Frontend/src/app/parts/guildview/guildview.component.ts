@@ -4,6 +4,7 @@ import { GuildService } from 'src/app/services/GuildService/guild.service';
 import { Guild } from 'src/app/models/guild';
 import { GuildsettingsComponent } from '../guildsettings/guildsettings.component';
 import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
+import { Channel } from 'src/app/models/channel';
 
 @Component({
   selector: 'app-guildview',
@@ -12,7 +13,8 @@ import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
 })
 export class GuildviewComponent implements OnInit {
   guild: Guild;
-  currentSearchId;
+  currentSearchId: string;
+  targetTextChannel: Channel;
 
   constructor(private route: ActivatedRoute,
     private dialog: MatDialog,
@@ -39,6 +41,7 @@ export class GuildviewComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result != null && result == true) {
         this.guild = null;
+        this.router.navigate(['./dashboard']);
       }
     });
   }
@@ -50,7 +53,6 @@ export class GuildviewComponent implements OnInit {
       this.guild = null;
       this.guildService.getGuild(id).subscribe(
         data => {
-          console.debug("got data")
           this.guild = data;
         },
         error => {
