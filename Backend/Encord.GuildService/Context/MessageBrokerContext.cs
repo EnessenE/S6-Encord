@@ -25,7 +25,7 @@ namespace Encord.ChannelService.Context
             _logger = logger;
             _brokerSettings = brokerSettings.Value;
             _factory = new ConnectionFactory() { HostName = _brokerSettings.Host, UserName = _brokerSettings.Username, Password = _brokerSettings.Password };
-            ReceiveMessages("Channel");
+            ReceiveMessages("Guild");
         }
 
         public IConnection GetConnection()

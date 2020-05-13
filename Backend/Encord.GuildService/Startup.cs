@@ -44,7 +44,7 @@ namespace Encord.GuildService
 
             services.AddSwaggerDocument(document =>
             {
-                document.Title = "Channel API";
+                document.Title = "Guild API";
 
                 document.AddSecurity("bearer", Enumerable.Empty<string>(), new OpenApiSecurityScheme
                 {
