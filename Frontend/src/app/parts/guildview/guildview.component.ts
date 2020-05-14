@@ -5,6 +5,7 @@ import { Guild } from 'src/app/models/guild';
 import { GuildsettingsComponent } from '../guildsettings/guildsettings.component';
 import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
 import { Channel } from 'src/app/models/channel';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-guildview',
@@ -19,13 +20,27 @@ export class GuildviewComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private dialog: MatDialog,
     private guildService: GuildService,
-    private router: Router) { }
+    private router: Router,
+    private titleService: Title) { }
 
   ngOnInit(): void {
     this.getGuild()
     this.router.events.subscribe((val) => {
       this.getGuild();
     });
+  }
+
+  SelectChannel($event) {
+    const channel = $event;
+    if (channel) {
+      if (channel.type == "TextChannel") {
+        this.targetTextChannel = $event;
+      }
+      console.log("Changed channel to", this.targetTextChannel.name)
+    }
+    else {
+      console.log("No channel selected");
+    }
   }
 
   GuildSettings() {
@@ -54,6 +69,7 @@ export class GuildviewComponent implements OnInit {
       this.guildService.getGuild(id).subscribe(
         data => {
           this.guild = data;
+          this.titleService.setTitle(data.name)
         },
         error => {
           console.error(error);

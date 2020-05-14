@@ -2,13 +2,12 @@
     <ng-template [ngIf]="!guild" [ngIfElse]="loaded">
         <app-loading class="col-12"></app-loading>
     </ng-template>
-    <div class="col-sm-2 channels bar">
     <ng-template #loaded>
-        <div class="col-sm-2 channels bar">
-            <div class="name col-12">
-                <a (click)="GuildSettings()">{{guild.name}}</a>
-            </div>
-            <app-channels></app-channels>
+        <div class="name col-12 guildbar">
+            <a (click)="GuildSettings()">{{guild.name}}</a>
+        </div>
+        <div class="col-sm-2 channels">
+            <app-channels (selectedChannel)=SelectChannel($event)></app-channels>
         </div>
         <div class="col-sm-8 chat bar">
             <app-chatview [channel]="targetTextChannel"></app-chatview>

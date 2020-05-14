@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Guild } from 'src/app/models/guild';
 import { environment } from 'src/environments/environment';
 import { Channel } from 'src/app/models/channel';
+import { TextChannel } from 'src/app/models/text-channel';
 
 @Injectable({
   providedIn: 'root'
@@ -24,8 +25,8 @@ export class ChannelService {
     return this.http.get<Channel[]>(environment.api_base + `/channel/guild/` + id, { headers: this.getHeaders() });
   }
 
-  public getChannel(id: string): Observable<Channel> {
-    return this.http.get<Channel>(environment.api_base + '/channel/' + id, { headers: this.getHeaders() });
+  public getTextChannel(id: string): Observable<TextChannel> {
+    return this.http.get<TextChannel>(environment.api_base + '/channel/text/' + id, { headers: this.getHeaders() });
   }
 
   public createChannel(data: Channel): Observable<Channel> {

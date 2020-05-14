@@ -5,3 +5,7 @@
 .bar{
     height: 98vh;
 }
+
+.guildbar{
+    min-height: 2vh;
+}

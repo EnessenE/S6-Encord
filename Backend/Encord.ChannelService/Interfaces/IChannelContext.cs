@@ -11,6 +11,7 @@ namespace Encord.ChannelService.Interfaces
         TextChannel GetTextChannel(string id);
         VoiceChannel GetVoiceChannel(string id);
 
+        void AddMessage(TextChannel channel, Message message);
         List<Channel> GetAllChannelsInGuild(string guildId);
 
         bool DeleteAllChannelsInGuild(string guildId);

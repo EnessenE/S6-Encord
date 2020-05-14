@@ -44,6 +44,21 @@ namespace Encord.ChannelService.Context
             return channel;
         }
 
+        public void AddMessage(TextChannel channel, Message message)
+        {
+            channel = GetTextChannel(channel.Id);
+            if (channel != null)
+            {
+                if (channel.Messages == null)
+                {
+                    channel.Messages = new List<Message>();
+                }
+
+                channel.Messages.Add(message);
+                SaveChanges();
+            }
+        }
+
         public VoiceChannel GetVoiceChannel(string id)
         {
             var result = VoiceChannels.Where(a => a.Id == id);

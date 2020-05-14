@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Channel } from 'src/app/models/channel';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ChannelService } from 'src/app/services/ChannelService/channel.service';
@@ -18,6 +18,9 @@ export class ChannelsComponent implements OnInit {
   faHeadphonesAlt = faHeadphonesAlt;
   faAlignLeft = faAlignLeft;
 
+  @Output()
+  selectedChannel: EventEmitter<Channel> = new EventEmitter<Channel>();
+
   constructor(private route: ActivatedRoute,
     private channelService: ChannelService,
     private dialog: MatDialog,
@@ -27,12 +30,23 @@ export class ChannelsComponent implements OnInit {
     this.getChannels()
   }
 
+  getFirstTextChannel(): Channel{
+    console.log("Finding a channel to select");
+    var channel = null;
+    this.channels.forEach(element => {
+      if (element.type == "TextChannel"){
+        channel = element;
+      }
+    });
+    return channel;
+  }
   getChannels() {
     const id = this.route.snapshot.paramMap.get('id');
     this.currentId = id;
     this.channelService.getAllChannelsOnGuild(id.toString()).subscribe(
       data => {
         this.channels = data;
+        this.selectedChannel.emit(this.getFirstTextChannel())
       },
       error => {
         console.error(error);
@@ -40,7 +54,7 @@ export class ChannelsComponent implements OnInit {
   }
 
   onSelect(channel: Channel) {
-    console.log("click " + channel.name);
+    this.selectedChannel.emit(channel);
   }
 
   CreateChannel() {
