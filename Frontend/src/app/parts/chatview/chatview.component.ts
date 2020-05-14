@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, NgZone } from '@angular/core';
+import { Component, OnInit, Input, NgZone, ViewChild, ElementRef } from '@angular/core';
 import { Channel } from 'src/app/models/channel';
 import { ChatService } from 'src/app/services/ChatService/chat.service';
 import { Message } from 'src/app/models/message';
@@ -10,34 +10,50 @@ import { ChannelService } from 'src/app/services/ChannelService/channel.service'
   styleUrls: ['./chatview.component.css']
 })
 export class ChatviewComponent implements OnInit {
+  @ViewChild('chatBox') private myScrollContainer: ElementRef;
+  txtMessage: string = '';
+  uniqueID: string = new Date().getTime().toString();
+  messages;
+  message = new Message();
+
+  private _channel: Channel;
   @Input()
-  channel: Channel;
+  set channel(val: Channel) {
+    this._channel = val;
+    this.retrieveData();
+  }
+  get channel() {
+    return this._channel;
+  }
 
   ngOnInit(): void {
-    this.retrieveData()
   }
 
   constructor(
     private chatService: ChatService,
     private channelService: ChannelService,
     private _ngZone: NgZone) {
-    this.subscribeToEvents();
   }
 
-  title = 'ClientApp';
-  txtMessage: string = '';
-  uniqueID: string = new Date().getTime().toString();
-  messages;
-  message = new Message();
-
+  scrollToBottom(): void {
+    try {
+      this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+    } catch (err) {
+      console.log("scroll failed", err)
+    }
+  }
 
   retrieveData() {
     console.log("Retrieving data");
-    if (this.channel) {
-      this.channelService.getTextChannel(this.channel.id).subscribe(
+    if (this._channel) {
+      var id = this._channel.id;
+      this._channel = null;
+      this.channelService.getTextChannel(id).subscribe(
         result => {
-          this.channel = result;
+          this._channel = result;
           this.messages = result.messages;
+          this.subscribeToEvents();
+          this.scrollToBottom();
         });
     }
     else {
@@ -46,7 +62,7 @@ export class ChatviewComponent implements OnInit {
   }
 
   sendMessage(): void {
-    if (!this.messages){
+    if (!this.messages) {
       this.messages = new Array<Message>();
     }
     if (this.txtMessage) {
@@ -54,23 +70,29 @@ export class ChatviewComponent implements OnInit {
       this.message.clientuniqueid = this.uniqueID;
       this.message.type = "sent";
       this.message.content = this.txtMessage;
-      this.message.channelId = this.channel.id;
+      this.message.channelId = this._channel.id;
       //this.messages.push(this.message);
       this.chatService.sendMessage(this.message);
+      this.scrollToBottom()
       this.txtMessage = '';
     }
   }
   private subscribeToEvents(): void {
+    var channelid = this._channel.id;
     this.chatService.messageReceived.subscribe((message: Message) => {
+      if (channelid != this._channel.id){
+        this.chatService.messageReceived.unsubscribe
+      }
       this._ngZone.run(() => {
-       // if (message.clientuniqueid !== this.uniqueID) {
-          console.log("Message received")
-          message.type = "received";
-          if (!this.messages){
-            this.messages = new Array<Message>();
-          }
-          this.messages.push(message);
-       // }
+        // if (message.clientuniqueid !== this.uniqueID) {
+        console.log("Message received")
+        message.type = "received";
+        if (!this.messages) {
+          this.messages = new Array<Message>();
+        }
+        this.messages.push(message);
+        this.scrollToBottom();
+        // }
       });
     });
   }

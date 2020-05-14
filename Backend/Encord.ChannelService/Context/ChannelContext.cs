@@ -35,7 +35,7 @@ namespace Encord.ChannelService.Context
 
         public TextChannel GetTextChannel(string id)
         {
-            var result = TextChannels.Where(a => a.Id == id);
+            var result = TextChannels.Where(a => a.Id == id).Include(m => m.Messages);
             TextChannel channel = null;
             if (result.Any())
             {
