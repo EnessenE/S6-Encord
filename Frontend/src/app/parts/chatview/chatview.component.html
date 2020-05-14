@@ -9,7 +9,7 @@
               <div class="incoming_msg_img"> </div>  
               <div class="received_msg">  
                 <div class="received_withd_msg">  
-                    <b>Name: {{msg.name}}</b>
+                    <b>{{msg.name}}</b>
                     <p>  
                         {{msg.message}}   
                     </p>  
@@ -19,7 +19,7 @@
             </div>  
             <div class="outgoing_msg" *ngIf="msg.type == 'sent'">  
               <div class="sent_msg">  
-                <b>Name: {{msg.name}}</b>
+                <b><b>You</b>></b>
                 <p>  
                     {{msg.message}}   
                 </p>  

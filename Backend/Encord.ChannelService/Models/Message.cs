@@ -1,14 +1,20 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Encord.ChannelService.Models
 {
     public class Message
     {
-        public string clientuniqueid { get; set; }
-        public string type { get; set; }
-        public string name { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public string Id { get; set; }
+        public string ClientId { get; set; }
+        public string Type { get; set; }
+        public string Name { get; set; }
 
-        public string message { get; set; }
-        public DateTime date { get; set; }
+        public string Content { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime LastUpdate { get; set; }
     }
 }

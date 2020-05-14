@@ -38,7 +38,7 @@ namespace Encord.ChannelService.Context
             {
                 return _savedConnection;
             }
-            _logger.LogWarning("Creating a new connection to the message broker");
+            _logger.LogWarning("Creating a new connection to the Content broker");
             _savedConnection = _factory.CreateConnection();
             return _savedConnection;
         }
@@ -61,7 +61,7 @@ namespace Encord.ChannelService.Context
             {
                 var body = eventargs.Body;
                 var message = Encoding.UTF8.GetString(body.ToArray());
-                _logger.LogDebug("Message received!: {message}", message);
+                _logger.LogDebug("Message received!: {Content}", message);
                 var item = JsonConvert.DeserializeObject<ChannelMessage>(message);
                 _handler.HandleMessage(item);
             };
@@ -72,10 +72,10 @@ namespace Encord.ChannelService.Context
 
 
         /// <summary>
-        /// Send a message to the message broker
+        /// Send a Content to the Content broker
         /// </summary>
-        /// <param name="exchange">The exchange/queue you want to throw the message into</param>
-        /// <param name="data">The object that has to be converted to JSON and sent to the queue</param>
+        /// <param Name="exchange">The exchange/queue you want to throw the Content into</param>
+        /// <param Name="data">The object that has to be converted to JSON and sent to the queue</param>
         public void CreateMessage(string exchange, object data)
         {
             using (var channel = _connection.CreateModel())
@@ -87,7 +87,7 @@ namespace Encord.ChannelService.Context
                     routingKey: "",
                     basicProperties: null,
                     body: body);
-                _logger.LogInformation("Sending message to exchange {exchange} with body: {body}", exchange, body);
+                _logger.LogInformation("Sending Content to exchange {exchange} with body: {body}", exchange, body);
             }
         }
     }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using AutoMapper;
 using Encord.ChannelService.Context;
 using Encord.ChannelService.Handlers;
 using Encord.ChannelService.Interfaces;
@@ -115,6 +116,9 @@ namespace Encord.ChannelService
             services.AddTransient<MessageHandler>();
             services.AddSingleton<MessageBrokerContext>();
 
+            //Add automapper
+            services.AddAutoMapper(typeof(Startup));
+            
             //Add websockets
             services.AddSignalR();
 

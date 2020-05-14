@@ -8,8 +8,11 @@ namespace Encord.ChannelService.Interfaces
 {
     public interface IChannelContext
     {
-        Channel GetChannel(string id);
+        TextChannel GetTextChannel(string id);
+        VoiceChannel GetVoiceChannel(string id);
+
         List<Channel> GetAllChannelsInGuild(string guildId);
+
         bool DeleteAllChannelsInGuild(string guildId);
 
         Channel CreateChannel(Channel guild);

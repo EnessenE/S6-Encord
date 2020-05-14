@@ -26,10 +26,16 @@ namespace Encord.ChannelService.Controllers
             _messageBroker = messageBroker;
         }
 
-        [HttpGet("{id}")]
-        public Channel GetChannel(string id)
+        [HttpGet("text/{id}")]
+        public TextChannel GetTextChannel(string id)
         {
-            return _channelContext.GetChannel(id);
+            return _channelContext.GetTextChannel(id);
+        }
+
+        [HttpGet("voice/{id}")]
+        public VoiceChannel GetVoiceChannel(string id)
+        {
+            return _channelContext.GetVoiceChannel(id);
         }
 
         [HttpGet("guild/{guildId}")]

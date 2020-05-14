@@ -21,7 +21,7 @@ namespace Encord.ChannelService.Handlers
 
         public void HandleMessage(ChannelMessage channelMessage)
         {
-            _logger.LogInformation("Handling a received message");
+            _logger.LogInformation("Handling a received Content");
 
             if (channelMessage.Deletion)
             {

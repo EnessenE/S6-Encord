@@ -20,11 +20,12 @@ namespace Encord.ChannelService.Handlers
         {
             _logger = logger;
         }
+
         public async Task NewMessage(Message msg)
         {
-            _logger.LogInformation("Message from {name}", Context.User.GetName());
-            msg.clientuniqueid = Context.User.GetUserId();
-            msg.name = Context.User.GetName();
+            _logger.LogInformation("Message from {Name}", Context.User.GetName());
+            msg.ClientId = Context.User.GetUserId();
+            msg.Name = Context.User.GetName();
             await Clients.All.SendAsync("MessageReceived", msg);
         }
 
