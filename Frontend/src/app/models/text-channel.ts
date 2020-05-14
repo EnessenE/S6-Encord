@@ -6,5 +6,5 @@ export class TextChannel {
     type: string;
     createdDate: Date;
     guildID: string;
-    messages: Message[]
+    messages: Message[];
 }

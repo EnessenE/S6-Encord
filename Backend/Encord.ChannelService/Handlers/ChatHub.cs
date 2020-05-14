@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Encord.ChannelService.Interfaces;
 using Encord.ChannelService.Models;
 using Encord.Common.Extensions;
 using Microsoft.AspNetCore.Authorization;
@@ -15,10 +16,12 @@ namespace Encord.ChannelService.Handlers
     public class ChatHub : Hub
     {
         private readonly ILogger<ChatHub> _logger;
+        private IChannelContext _channelContext;
 
-        public ChatHub(ILogger<ChatHub> logger)
+        public ChatHub(ILogger<ChatHub> logger, IChannelContext channelContext)
         {
             _logger = logger;
+            _channelContext = channelContext;
         }
 
         public async Task NewMessage(Message msg)
@@ -26,6 +29,13 @@ namespace Encord.ChannelService.Handlers
             _logger.LogInformation("Message from {Name}", Context.User.GetName());
             msg.ClientId = Context.User.GetUserId();
             msg.Name = Context.User.GetName();
+            msg.CreatedAt = DateTime.Now;
+            msg.LastUpdate = DateTime.Now;
+            TextChannel channel = new TextChannel()
+            {
+                Id = msg.ChannelId
+            };
+            _channelContext.AddMessage(channel, msg);
             await Clients.All.SendAsync("MessageReceived", msg);
         }
 

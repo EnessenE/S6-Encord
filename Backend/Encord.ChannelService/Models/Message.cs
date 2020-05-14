@@ -16,5 +16,11 @@ namespace Encord.ChannelService.Models
         public string Content { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime LastUpdate { get; set; }
+
+        /// <summary>
+        /// Used for transferring the message between the client and the server
+        /// </summary>
+        [NotMapped]
+        public string ChannelId { get; set; }
     }
 }
