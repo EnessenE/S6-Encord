@@ -1,0 +1,93 @@
+{
+  "id": "a6530b18-3934-47b3-ad56-21b78d13a9c5",
+  "version": "2.0",
+  "name": "Encord",
+  "url": "http://localhost:4200",
+  "tests": [{
+    "id": "3c9e0ea9-6dd7-48ea-b86c-8557607c979a",
+    "name": "Login",
+    "commands": [{
+      "id": "b9c68861-9eb6-4249-bc3b-5237593accfa",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "f8a64b5c-2007-42b1-a725-e5cdcadb35e0",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "2576x1426",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "76132577-773b-48d0-8ea0-7c8a282e9a87",
+      "comment": "",
+      "command": "click",
+      "target": "css=.form-group:nth-child(1) > .form-control",
+      "targets": [
+        ["css=.form-group:nth-child(1) > .form-control", "css:finder"],
+        ["xpath=//input[@type='text']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "23411454-9f71-4ef9-9732-1855e195f3f9",
+      "comment": "",
+      "command": "type",
+      "target": "css=.form-group:nth-child(1) > .form-control",
+      "targets": [
+        ["css=.form-group:nth-child(1) > .form-control", "css:finder"],
+        ["xpath=//input[@type='text']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Enes"
+    }, {
+      "id": "4f50296d-df4f-4311-875a-b409e4b18157",
+      "comment": "",
+      "command": "type",
+      "target": "css=.form-group:nth-child(2) > .form-control",
+      "targets": [
+        ["css=.form-group:nth-child(2) > .form-control", "css:finder"],
+        ["xpath=//input[@type='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "Welkom01!"
+    }, {
+      "id": "6e281b49-5840-45b3-b6ff-5060d5b652a4",
+      "comment": "",
+      "command": "sendKeys",
+      "target": "css=.ng-untouched",
+      "targets": [
+        ["css=.ng-untouched", "css:finder"],
+        ["xpath=//input[@type='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "${KEY_ENTER}"
+    }, {
+      "id": "da845c60-72ef-41f7-a523-3c5512ea2d09",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Logout",
+      "targets": [
+        ["linkText=Logout", "linkText"],
+        ["css=app-topbar > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Logout')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"],
+        ["xpath=//a[contains(.,'Logout')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "a52eaeef-e1d4-4d45-b54c-25563af4a479",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": []
+  }],
+  "urls": ["http://localhost:4200/"],
+  "plugins": []
+}

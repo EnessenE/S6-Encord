@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Encord.APIGateway", "Encord
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{5A554487-0B19-4558-B018-39BCEC8BE9DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Encord.ChannelService", "Encord.ChannelService\Encord.ChannelService.csproj", "{628DB232-7398-456D-B927-DBDB1300A9DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Encord.ChannelService", "Encord.ChannelService\Encord.ChannelService.csproj", "{628DB232-7398-456D-B927-DBDB1300A9DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
