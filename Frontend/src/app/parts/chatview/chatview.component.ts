@@ -15,6 +15,8 @@ export class ChatviewComponent implements OnInit {
   uniqueID: string = new Date().getTime().toString();
   messages;
   message = new Message();
+  connected: boolean;
+  hoverIndex: number = -1;
 
   private _channel: Channel;
   @Input()
@@ -27,6 +29,10 @@ export class ChatviewComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.chatService.connectionEstablished.subscribe((state: boolean) => {
+      this.connected = state;
+    });
+    this.scrollToBottom();
   }
 
   constructor(
@@ -39,8 +45,11 @@ export class ChatviewComponent implements OnInit {
     try {
       this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
     } catch (err) {
-      console.log("scroll failed", err)
     }
+  }
+
+  onHover(i: number) {
+    this.hoverIndex = i;
   }
 
   retrieveData() {
@@ -52,6 +61,10 @@ export class ChatviewComponent implements OnInit {
         result => {
           this._channel = result;
           this.messages = result.messages;
+
+          this.messages = this.messages.sort(function (a, b) {
+            return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
+          });
           this.subscribeToEvents();
           this.scrollToBottom();
         });
@@ -80,7 +93,7 @@ export class ChatviewComponent implements OnInit {
   private subscribeToEvents(): void {
     var channelid = this._channel.id;
     this.chatService.messageReceived.subscribe((message: Message) => {
-      if (channelid != this._channel.id){
+      if (channelid != this._channel.id) {
         this.chatService.messageReceived.unsubscribe
       }
       this._ngZone.run(() => {

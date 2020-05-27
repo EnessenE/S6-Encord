@@ -6,11 +6,23 @@
   <ng-template #loaded>
     <div #chatBox class="overflow-auto chatbox">
       <div class="container">
-        <h3 class=" text-center chat_header">Chat Application - {{channel.name}}</h3>
-        <div class="chat">
-          <div>
-            <div *ngFor="let msg of messages">
-              <div class=""><b>{{msg.name}}</b> {{msg.content}}</div>
+        <div class="row">
+          <h3 class="col-12 text-center chat_header">Chat Application - {{channel.name}}</h3>
+          <ng-template [ngIf]="!connected">
+            <app-loading class="col-1"></app-loading>
+            <div class="col-11 alert alert-danger" role="alert">
+              Lost connection! Trying to reconnect...
+            </div>
+          </ng-template>
+          <div class="chat">
+            <div>
+              <div *ngFor="let msg of messages; let i = index">
+                <div (mouseenter)="onHover(i)" (mouseleave)="onHover(-1)">
+                  <div *ngIf = "i == hoverIndex" class="">{{msg.createdAt | date:'full'}}</div>
+                  <div class=""><b>{{msg.name}}</b> {{msg.content}}</div>
+                </div>
+
+              </div>
             </div>
           </div>
         </div>

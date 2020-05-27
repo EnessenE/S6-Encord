@@ -1,3 +1,10 @@
 .chatbox{
     height: 90vh;
 }
+
+div span.showdate {
+    visibility: hidden;
+}
+div:hover span.showdate  {
+    visibility: visible;
+}

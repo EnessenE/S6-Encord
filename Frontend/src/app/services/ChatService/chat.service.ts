@@ -49,6 +49,7 @@ export class ChatService {
       })
       .catch(err => {
         console.log('Error while establishing connection, retrying...');
+        this.connectionEstablished.emit(false);
         setTimeout(function () { this.startConnection(); }, 5000);
       });
   }
