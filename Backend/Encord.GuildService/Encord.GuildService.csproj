@@ -17,6 +17,8 @@
     <Compile Remove="Migrations\20200512122446_namechange.Designer.cs" />
     <Compile Remove="Migrations\20200512134108_Test.cs" />
     <Compile Remove="Migrations\20200512134108_Test.Designer.cs" />
+    <Compile Remove="Migrations\20200527115428_NonDeletableGuildsDefaultValue.cs" />
+    <Compile Remove="Migrations\20200527115428_NonDeletableGuildsDefaultValue.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

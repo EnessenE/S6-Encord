@@ -55,6 +55,7 @@ export class CreatechannelComponent implements OnInit {
     }
     else{
       //this.submitted = false
+      console.log("Failed validation");
       return false;
     }
     //this.submitted = false

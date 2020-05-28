@@ -5,7 +5,7 @@
   "url": "http://localhost:4200",
   "tests": [{
     "id": "3c9e0ea9-6dd7-48ea-b86c-8557607c979a",
-    "name": "Login",
+    "name": "1. LoginAndLogout",
     "commands": [{
       "id": "b9c68861-9eb6-4249-bc3b-5237593accfa",
       "comment": "",
@@ -65,7 +65,7 @@
       ],
       "value": "${KEY_ENTER}"
     }, {
-      "id": "da845c60-72ef-41f7-a523-3c5512ea2d09",
+      "id": "c3cadd71-1a1a-4659-9e2f-4f6e177bcc37",
       "comment": "",
       "command": "click",
       "target": "linkText=Logout",
@@ -78,6 +78,243 @@
         ["xpath=//a[contains(.,'Logout')]", "xpath:innerText"]
       ],
       "value": ""
+    }]
+  }, {
+    "id": "4dcaadf5-e489-4186-9c26-d892b3334ebd",
+    "name": "5. LookThroughChannels",
+    "commands": [{
+      "id": "11080aac-165b-411d-8497-8eff6040207a",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b44124a7-0076-48dd-8dfc-d280c47ee459",
+      "comment": "",
+      "command": "click",
+      "target": "xpath=//*[contains(text(), \"MainTestGuild\")]",
+      "targets": [
+        ["css=a:nth-child(1) > .guild", "css:finder"],
+        ["xpath=//a/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0c52d958-1886-4e85-b515-6c0267b3aaad",
+      "comment": "",
+      "command": "click",
+      "target": "css=a:nth-child(1) > .list .table-cell",
+      "targets": [
+        ["css=a:nth-child(1) > .list .table-cell", "css:finder"],
+        ["xpath=//app-channels/a/div/div/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "af342bbc-e508-43c3-89b6-877e42ff76e7",
+      "comment": "",
+      "command": "click",
+      "target": "css=a:nth-child(2) > .list .table-cell",
+      "targets": [
+        ["css=a:nth-child(2) > .list .table-cell", "css:finder"],
+        ["xpath=//app-channels/a[2]/div/div/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "609f365e-175a-4ac3-bd75-a279442ba38a",
+      "comment": "",
+      "command": "click",
+      "target": "css=a:nth-child(1) > .list .table-cell",
+      "targets": [
+        ["css=a:nth-child(1) > .list .table-cell", "css:finder"],
+        ["xpath=//app-channels/a/div/div/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "9aecb649-1a3c-43dd-bcba-c8848719eb87",
+      "comment": "",
+      "command": "click",
+      "target": "css=a:nth-child(2) > .list .table-cell",
+      "targets": [
+        ["css=a:nth-child(2) > .list .table-cell", "css:finder"],
+        ["xpath=//app-channels/a[2]/div/div/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "9b26de63-8f99-4770-ba64-0c3f3f82cfba",
+      "comment": "",
+      "command": "click",
+      "target": "css=a:nth-child(2) > .guild",
+      "targets": [
+        ["css=a:nth-child(2) > .guild", "css:finder"],
+        ["xpath=//a[2]/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "bce37e02-6478-4375-b37a-d41d6d210066",
+      "comment": "",
+      "command": "click",
+      "target": "css=.channelbox",
+      "targets": [
+        ["css=.channelbox", "css:finder"],
+        ["xpath=//app-channels/a/div/div/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "5b9d46c2-a487-47ec-b17a-1025d5cc0699",
+      "comment": "",
+      "command": "click",
+      "target": "css=.channelbox",
+      "targets": [
+        ["css=.channelbox", "css:finder"],
+        ["xpath=//app-channels/a/div/div/div", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "da3c54a8-cf59-4cbd-83e1-ea4720d27275",
+    "name": "3. Create a new guild",
+    "commands": [{
+      "id": "59992a4c-5f2e-48f1-982b-fb411fb2cf50",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "7262898d-9933-4589-a0ed-9702aff86d76",
+      "comment": "",
+      "command": "click",
+      "target": "xpath=//*[contains(text(), \"CREATE\")]",
+      "targets": [
+        ["css=a:nth-child(4) > .guild", "css:finder"],
+        ["xpath=//a[4]/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "66d2eb15-32d6-40bd-9add-b55ee536eabe",
+      "comment": "",
+      "command": "type",
+      "target": "css=.form-control",
+      "targets": [
+        ["css=.form-control", "css:finder"],
+        ["xpath=//input[@type='text']", "xpath:attributes"],
+        ["xpath=//mat-dialog-container[@id='mat-dialog-0']/app-createguild/form/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "SeleniumTestGuild"
+    }, {
+      "id": "1a5ed44a-e146-4211-9bb8-3635e9ec2299",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn:nth-child(3)",
+      "targets": [
+        ["css=.btn:nth-child(3)", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//mat-dialog-container[@id='mat-dialog-0']/app-createguild/form/button[2]", "xpath:idRelative"],
+        ["xpath=//button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'Submit')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "b00af78d-5e87-42bb-be51-155e17777cbe",
+    "name": "4. Delete guild",
+    "commands": [{
+      "id": "db9a6315-fbe4-4aee-9eb6-6f3d282e7237",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "19cdab68-cab5-4cca-8528-859e4985cadb",
+      "comment": "",
+      "command": "click",
+      "target": "xpath=//*[contains(text(), \"SeleniumTestGuild\")]",
+      "targets": [
+        ["css=div > a:nth-child(1) > .guild", "css:finder"],
+        ["xpath=//a/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "17a76ef0-29cc-422c-8c07-071a97002e85",
+      "comment": "",
+      "command": "click",
+      "target": "css=.name > a",
+      "targets": [
+        ["css=.name > a", "css:finder"],
+        ["xpath=//a[contains(text(),'SeleniumTestGuild')]", "xpath:link"],
+        ["xpath=//div/div/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "42454198-c14b-4faf-a871-5c63a7152b5d",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-danger",
+      "targets": [
+        ["css=.btn-danger", "css:finder"],
+        ["xpath=//button[@type='button']", "xpath:attributes"],
+        ["xpath=//mat-dialog-container[@id='mat-dialog-1']/app-guildsettings/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Delete guild')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "8fbc6963-4f1d-4492-8104-4dc0baffb05c",
+    "name": "2. Login",
+    "commands": [{
+      "id": "bf8a35ed-ac7d-44ee-9717-80e975c0aa9f",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "929936fa-d415-4e4b-9fd5-927ef32e69cd",
+      "comment": "",
+      "command": "click",
+      "target": "css=.form-group:nth-child(1) > .form-control",
+      "targets": [
+        ["css=.form-group:nth-child(1) > .form-control", "css:finder"],
+        ["xpath=//input[@type='text']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3405e966-9420-4441-8d8d-66514c1e06ea",
+      "comment": "",
+      "command": "type",
+      "target": "css=.form-group:nth-child(1) > .form-control",
+      "targets": [
+        ["css=.form-group:nth-child(1) > .form-control", "css:finder"],
+        ["xpath=//input[@type='text']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Enes"
+    }, {
+      "id": "1a1ffa92-b979-4e2d-acb7-95626e63e9f5",
+      "comment": "",
+      "command": "type",
+      "target": "css=.form-group:nth-child(2) > .form-control",
+      "targets": [
+        ["css=.form-group:nth-child(2) > .form-control", "css:finder"],
+        ["xpath=//input[@type='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "Welkom01!"
+    }, {
+      "id": "9b306865-a001-4a9d-911d-7012ae7e4d72",
+      "comment": "",
+      "command": "sendKeys",
+      "target": "css=.ng-untouched",
+      "targets": [
+        ["css=.ng-untouched", "css:finder"],
+        ["xpath=//input[@type='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "${KEY_ENTER}"
     }]
   }],
   "suites": [{

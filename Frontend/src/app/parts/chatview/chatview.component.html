@@ -8,12 +8,12 @@
       <div class="container">
         <div class="row">
           <h3 class="col-12 text-center chat_header">Chat Application - {{channel.name}}</h3>
-          <ng-template [ngIf]="!connected">
+          <!-- <ng-template [ngIf]="!connected">
             <app-loading class="col-1"></app-loading>
             <div class="col-11 alert alert-danger" role="alert">
               Lost connection! Trying to reconnect...
             </div>
-          </ng-template>
+          </ng-template> -->
           <div class="chat">
             <div>
               <div *ngFor="let msg of messages; let i = index">

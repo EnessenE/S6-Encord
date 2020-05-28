@@ -33,7 +33,6 @@ export class ChatService {
 
 
   private createConnection() {
-
     this._hubConnection = new signalR.HubConnectionBuilder()
       .withUrl('https://localhost:7031/ws/chat', this.options)
       .build();

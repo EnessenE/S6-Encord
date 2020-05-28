@@ -32,6 +32,7 @@ export class ChatviewComponent implements OnInit {
     this.chatService.connectionEstablished.subscribe((state: boolean) => {
       this.connected = state;
     });
+    this.subscribeToEvents();
     this.scrollToBottom();
   }
 
@@ -65,7 +66,6 @@ export class ChatviewComponent implements OnInit {
           this.messages = this.messages.sort(function (a, b) {
             return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
           });
-          this.subscribeToEvents();
           this.scrollToBottom();
         });
     }
@@ -75,6 +75,7 @@ export class ChatviewComponent implements OnInit {
   }
 
   sendMessage(): void {
+    console.log("Sending a message!");
     if (!this.messages) {
       this.messages = new Array<Message>();
     }
@@ -91,22 +92,22 @@ export class ChatviewComponent implements OnInit {
     }
   }
   private subscribeToEvents(): void {
-    var channelid = this._channel.id;
+    console.log("New channel to listen to");
+    //this.chatService.messageReceived.unsubscribe();
     this.chatService.messageReceived.subscribe((message: Message) => {
-      if (channelid != this._channel.id) {
-        this.chatService.messageReceived.unsubscribe
+      console.log("Message received")
+      if (message.channelId == this._channel.id) {
+        this._ngZone.run(() => {
+          // if (message.clientuniqueid !== this.uniqueID) {
+          message.type = "received";
+          if (!this.messages) {
+            this.messages = new Array<Message>();
+          }
+          this.messages.push(message);
+          this.scrollToBottom();
+          // }
+        });
       }
-      this._ngZone.run(() => {
-        // if (message.clientuniqueid !== this.uniqueID) {
-        console.log("Message received")
-        message.type = "received";
-        if (!this.messages) {
-          this.messages = new Array<Message>();
-        }
-        this.messages.push(message);
-        this.scrollToBottom();
-        // }
-      });
     });
   }
 

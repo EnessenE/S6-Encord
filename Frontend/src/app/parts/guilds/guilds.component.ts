@@ -22,9 +22,14 @@ export class GuildsComponent implements OnInit {
   }
 
   loadAllGuilds(){
+    console.log("Reload all guilds")
     this.guildService.getAllGuilds().subscribe(
       data => {
         this.guilds = data;
+
+        this.guilds = this.guilds.sort(function (a, b) {
+          return new Date(a.creationDate).getTime() - new Date(b.creationDate).getTime();
+        });
       },
       error => {
         console.error(error);
@@ -46,8 +51,8 @@ export class GuildsComponent implements OnInit {
     
     let dialogRef = this.dialog.open(CreateguildComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
-      this.loadAllGuilds()
       if (result){
+        this.loadAllGuilds()
         this.onSelect(result);
       }
     });

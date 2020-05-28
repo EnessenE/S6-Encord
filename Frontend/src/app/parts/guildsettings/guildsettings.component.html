@@ -2,8 +2,11 @@
 
 <p>ID: {{guild.id}}</p>
 <p>Full name: {{guild.name}}</p>
-<p>Created at: {{guild.creationDate}}</p>
-
-<button type="button" class="btn btn-danger" (click)="delete()"><fa-icon [icon]="faBin"></fa-icon>Delete guild</button>
-
+<p>Created at {{guild.creationDate | date:'full'}}</p>
+<ng-template [ngIf]="!guild.deletable">This guild can't be deleted.</ng-template>
+<ng-template [ngIf]="guild.deletable">
+    <button type="button" class="btn btn-danger" (click)="delete()">
+        <fa-icon [icon]="faBin"></fa-icon>Delete guild
+    </button>
+</ng-template>
 <button mat-button class="btn btn-primary" mat-dialog-close>Close</button>

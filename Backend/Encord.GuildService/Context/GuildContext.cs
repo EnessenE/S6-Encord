@@ -54,6 +54,7 @@ namespace Encord.GuildService.Context
         public Guild CreateGuild(Guild guild)
         {
             guild.Id = null;
+            guild.Deletable = true;
             Add(guild);
             SaveChanges();
             return guild; //GuildId is filled by entity
@@ -61,9 +62,20 @@ namespace Encord.GuildService.Context
 
         public bool DeleteGuild(Guild guild)
         {
-            Remove(guild);
-            SaveChanges();
-            return true;
+            guild = GetGuild(guild.Id);
+
+            if (guild.Deletable)
+            {
+                Remove(guild);
+                SaveChanges();
+                return true;
+            }
+            else
+            {
+                _logger.LogWarning("There was an attempt to delete a guild that isn't deletable. Guild ID: {guild}", guild.Id);
+            }
+
+            return false;
         }
     }
 }
