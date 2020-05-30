@@ -1,0 +1,108 @@
+﻿{
+  "ReRoutes": [
+    {
+      "DownstreamPathTemplate": "/account/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "ingress-bbcd6300b8bce98b33c96e4787166fd9.encord.svc.cluster.local",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/account/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ]
+    },
+    {
+      "DownstreamPathTemplate": "/account/",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "ingress-bbcd6300b8bce98b33c96e4787166fd9.encord.svc.cluster.local",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/account/",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ]
+    },
+
+    {
+      "DownstreamPathTemplate": "/role/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "ingress-bbcd6300b8bce98b33c96e4787166fd9.encord.svc.cluster.local",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/role/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ]
+    },
+    {
+      "DownstreamPathTemplate": "/role/",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "ingress-bbcd6300b8bce98b33c96e4787166fd9.encord.svc.cluster.local",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/role/",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ]
+    },
+
+
+    {
+      "DownstreamPathTemplate": "/guild/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "ingress-bdb3397b75a21da4b794554f5b4ef311.encord.svc.cluster.local",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/guild/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ]
+    },
+    {
+      "DownstreamPathTemplate": "/guild/",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "ingress-bdb3397b75a21da4b794554f5b4ef311.encord.svc.cluster.local",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/guild/",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ]
+    },
+
+
+    {
+      "DownstreamPathTemplate": "/channel/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/channel/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ]
+    },
+    {
+      "DownstreamPathTemplate": "/channel/",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/channel/",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ]
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://dev.encord.kn01.fhict.nl/"
+  }
+}

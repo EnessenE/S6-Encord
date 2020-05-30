@@ -41,7 +41,7 @@ namespace Encord.APIGateway
             Host.CreateDefaultBuilder(args)
                 .UseSerilog()
                 .ConfigureAppConfiguration((host, config) => {
-                    config.AddJsonFile("ocelot.json", optional: false, reloadOnChange: true);
+                    config.AddJsonFile($"ocelot.{host.HostingEnvironment.EnvironmentName}.json");
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {

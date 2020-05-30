@@ -1,17 +1,17 @@
 version: '3.4'
 
 services:
+  encord.channelservice:
+    image: enes1/encordchannelservice
+    build:
+      context: .
+      dockerfile: Encord.ChannelService/Dockerfile
+
   encord.accountservice:
     image: enes1/encordaccountservice
     build:
       context: .
       dockerfile: Encord.AccountService/Dockerfile
-
-  encord.guildservice:
-    image: enes1/encordguildservice
-    build:
-      context: .
-      dockerfile: Encord.GuildService/Dockerfile
 
 
   encord.apigateway:
@@ -19,4 +19,11 @@ services:
     build:
       context: .
       dockerfile: Encord.APIGateway/Dockerfile
+
+
+  encord.guildservice:
+    image: enes1/encordguildservice
+    build:
+      context: .
+      dockerfile: Encord.GuildService/Dockerfile
 

@@ -8,6 +8,7 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
 COPY ["Encord.ChannelService/Encord.ChannelService.csproj", "Encord.ChannelService/"]
+COPY ["Common/Encord.Common.csproj", "Common/"]
 RUN dotnet restore "Encord.ChannelService/Encord.ChannelService.csproj"
 COPY . .
 WORKDIR "/src/Encord.ChannelService"

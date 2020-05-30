@@ -9,9 +9,11 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using NSwag;
 using NSwag.Generation.Processors.Security;
@@ -98,8 +100,17 @@ namespace Encord.AccountService
             services.AddControllers();
         }
 
+        public void ApplyMigrations(IdentityContext context)
+        {
+            if (context.Database.GetPendingMigrations().Any())
+            {
+                context.Database.Migrate();
+            }
+        }
+
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IdentityContext dbContext)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IdentityContext dbContext,
+            ILogger<Startup> logger)
         {
             app.UseCors("MyPolicy");
 
@@ -114,7 +125,11 @@ namespace Encord.AccountService
 
             app.UseAuthentication();
             app.UseAuthorization();
-            
+
+            logger.LogInformation("Migrating database...");
+            ApplyMigrations(dbContext);
+            logger.LogInformation("All migrations (if any) applied");
+
             app.UseOpenApi();
             app.UseSwaggerUi3();
 

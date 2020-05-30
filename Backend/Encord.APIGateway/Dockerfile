@@ -8,6 +8,7 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
 COPY ["Encord.APIGateway/Encord.APIGateway.csproj", "Encord.APIGateway/"]
+COPY ["Common/Encord.Common.csproj", "Common/"]
 RUN dotnet restore "Encord.APIGateway/Encord.APIGateway.csproj"
 COPY . .
 WORKDIR "/src/Encord.APIGateway"

@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -22,6 +23,7 @@ using Microsoft.IdentityModel.Tokens;
 using NSwag;
 using NSwag.Generation.Processors.Security;
 using Serilog;
+using ILogger = Serilog.ILogger;
 
 namespace Encord.GuildService
 {
@@ -104,9 +106,19 @@ namespace Encord.GuildService
             });
         }
 
+
+        public void ApplyMigrations(GuildContext context)
+        {
+            if (context.Database.GetPendingMigrations().Any())
+            {
+                context.Database.Migrate();
+            }
+        }
+
+
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         // MessageBrokerContext is called here so we listen to incoming requests from the messagebroker.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, MessageBrokerContext brokerContext)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, MessageBrokerContext brokerContext, GuildContext dbContext, ILogger<Startup> logger)
         {
             app.UseCors("MyPolicy");
 
@@ -121,6 +133,11 @@ namespace Encord.GuildService
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            logger.LogInformation("Migrating database...");
+            ApplyMigrations(dbContext);
+            logger.LogInformation("All migrations (if any) applied");
+
 
             app.UseOpenApi();
             app.UseSwaggerUi3();
