@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  api_base: 'localhost:7001',
+  api_base: 'apigateway.dev.encord.kn01.fhict.nl',
 
   settings: {
     minimalpasswordlength: 6
