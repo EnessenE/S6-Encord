@@ -103,6 +103,6 @@
     }
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "http://dev.encord.kn01.fhict.nl/"
+    "BaseUrl": "http://apigateway.dev.encord.kn01.fhict.nl/"
   }
 }
