@@ -5,7 +5,7 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "ingress-bbcd6300b8bce98b33c96e4787166fd9.encord.svc.cluster.local",
+          "Host": "ingress-71bce4063d74f677eb3b41458594012c.encord.svc.cluster.local",
           "Port": 80
         }
       ],
@@ -17,7 +17,7 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "ingress-bbcd6300b8bce98b33c96e4787166fd9.encord.svc.cluster.local",
+          "Host": "ingress-71bce4063d74f677eb3b41458594012c.encord.svc.cluster.local",
           "Port": 80
         }
       ],
@@ -30,7 +30,7 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "ingress-bbcd6300b8bce98b33c96e4787166fd9.encord.svc.cluster.local",
+          "Host": "ingress-71bce4063d74f677eb3b41458594012c.encord.svc.cluster.local",
           "Port": 80
         }
       ],
@@ -42,7 +42,7 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "ingress-bbcd6300b8bce98b33c96e4787166fd9.encord.svc.cluster.local",
+          "Host": "ingress-71bce4063d74f677eb3b41458594012c.encord.svc.cluster.local",
           "Port": 80
         }
       ],
