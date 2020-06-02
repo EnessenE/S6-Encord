@@ -3,13 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Encord.ChannelService.Migrations
 {
-    public partial class AddMessagesAndAbstractClasses : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Channels");
-
             migrationBuilder.CreateTable(
                 name: "TextChannels",
                 columns: table => new
@@ -80,21 +77,6 @@ namespace Encord.ChannelService.Migrations
 
             migrationBuilder.DropTable(
                 name: "TextChannels");
-
-            migrationBuilder.CreateTable(
-                name: "Channels",
-                columns: table => new
-                {
-                    GuildId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    GuildID = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Type = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Channels", x => x.GuildId);
-                });
         }
     }
 }

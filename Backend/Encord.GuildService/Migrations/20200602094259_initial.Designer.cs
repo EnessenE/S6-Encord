@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Encord.GuildService.Migrations
 {
     [DbContext(typeof(GuildContext))]
-    [Migration("20200527115020_NonDeletableGuilds")]
-    partial class NonDeletableGuilds
+    [Migration("20200602094259_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

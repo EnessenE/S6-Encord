@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Encord.ChannelService.Migrations
 {
     [DbContext(typeof(ChannelContext))]
-    [Migration("20200514074154_AddMessagesAndAbstractClasses")]
-    partial class AddMessagesAndAbstractClasses
+    [Migration("20200602094058_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
