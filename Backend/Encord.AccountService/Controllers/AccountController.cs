@@ -68,7 +68,7 @@ namespace Encord.AccountService.Controllers
                 LoginDto login = new LoginDto()
                 {
                     Username = user.UserName,
-                    Token = await GenerateJwtToken(model.Email, user)
+                    Token = await GenerateJwtToken(user.UserName, user)
                 };
                 return login;
             }
