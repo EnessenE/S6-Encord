@@ -27,6 +27,7 @@ namespace Encord.APIGateway
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddOcelot(Configuration);
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy",
@@ -34,8 +35,6 @@ namespace Encord.APIGateway
                         .AllowAnyMethod()
                         .AllowAnyHeader());
             });
-
-            services.AddOcelot(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,11 +46,10 @@ namespace Encord.APIGateway
             }
 
             app.UseRouting();
-            app.UseCors("CorsPolicy");
-
 
             await app.UseOcelot();
 
+            app.UseCors("CorsPolicy");
 
             app.UseEndpoints(endpoints =>
             {
