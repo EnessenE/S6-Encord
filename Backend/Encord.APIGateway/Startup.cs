@@ -48,6 +48,7 @@ namespace Encord.APIGateway
             }
 
             app.UseRouting();
+            app.UseCors("CorsPolicy");
 
 
             await app.UseOcelot();
