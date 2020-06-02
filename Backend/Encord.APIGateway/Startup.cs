@@ -32,8 +32,7 @@ namespace Encord.APIGateway
                 options.AddPolicy("CorsPolicy",
                     builder => builder.AllowAnyOrigin()
                         .AllowAnyMethod()
-                        .AllowAnyHeader()
-                        .AllowCredentials());
+                        .AllowAnyHeader());
             });
 
             services.AddOcelot(Configuration);
