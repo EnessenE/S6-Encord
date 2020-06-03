@@ -5,7 +5,8 @@ import { ChannelService } from 'src/app/services/ChannelService/channel.service'
 import { Guild } from 'src/app/models/guild';
 import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
 import { CreatechannelComponent } from '../createchannel/createchannel.component';
-import { faCoffee, faHeadphonesAlt, faAlignLeft } from '@fortawesome/free-solid-svg-icons';
+import { faCog, faHeadphonesAlt, faAlignLeft } from '@fortawesome/free-solid-svg-icons';
+import { ChannelsettingsComponent } from '../channelsettings/channelsettings.component';
 
 @Component({
   selector: 'app-channels',
@@ -14,9 +15,13 @@ import { faCoffee, faHeadphonesAlt, faAlignLeft } from '@fortawesome/free-solid-
 })
 export class ChannelsComponent implements OnInit {
   channels: Channel[];
-  currentId;
+  currentId;  
+  hoverIndex: number = -1;
+
+  //icons
   faHeadphonesAlt = faHeadphonesAlt;
   faAlignLeft = faAlignLeft;
+  faCog = faCog;
 
   @Output()
   selectedChannel: EventEmitter<Channel> = new EventEmitter<Channel>();
@@ -30,6 +35,25 @@ export class ChannelsComponent implements OnInit {
     this.getChannels()
   }
 
+  channelSettings(channel: Channel) {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '80%';
+    dialogConfig.height = '80%';
+    dialogConfig.data = channel;
+
+    let dialogRef = this.dialog.open(ChannelsettingsComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result != null && result == true) {
+        this.getChannels();
+        //remove channel from list
+      }
+    });
+  }
+
+
   getFirstTextChannel(): Channel{
     console.log("Finding a channel to select");
     var channel = null;
@@ -40,7 +64,9 @@ export class ChannelsComponent implements OnInit {
     });
     return channel;
   }
+  
   getChannels() {
+    console.log("Retrieving all channels again");
     const id = this.route.snapshot.paramMap.get('id');
     this.currentId = id;
     this.channelService.getAllChannelsOnGuild(id.toString()).subscribe(
@@ -53,11 +79,15 @@ export class ChannelsComponent implements OnInit {
       });
   }
 
+  onHover(i: number) {
+    this.hoverIndex = i;
+  }
+
   onSelect(channel: Channel) {
     this.selectedChannel.emit(channel);
   }
 
-  CreateChannel() {
+  createChannel() {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = false;

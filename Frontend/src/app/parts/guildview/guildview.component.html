@@ -4,10 +4,10 @@
     </ng-template>
     <ng-template #loaded>
         <div class="name col-12 guildbar">
-            <a (click)="GuildSettings()">{{guild.name}}</a>
+            <a (click)="guildSettings()">{{guild.name}}</a>
         </div>
         <div class="col-sm-2 channels">
-            <app-channels (selectedChannel)=SelectChannel($event)></app-channels>
+            <app-channels (selectedChannel)=selectChannel($event)></app-channels>
         </div>
         <div class="col-sm-8 chat bar">
             <app-chatview [channel]="targetTextChannel"></app-chatview>

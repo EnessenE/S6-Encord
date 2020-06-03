@@ -30,7 +30,7 @@ export class GuildviewComponent implements OnInit {
     });
   }
 
-  SelectChannel($event) {
+  selectChannel($event) {
     const channel = $event;
     if (channel) {
       if (channel.type == "TextChannel") {
@@ -43,7 +43,7 @@ export class GuildviewComponent implements OnInit {
     }
   }
 
-  GuildSettings() {
+  guildSettings() {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = false;

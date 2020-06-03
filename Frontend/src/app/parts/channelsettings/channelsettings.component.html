@@ -1,0 +1,11 @@
+<h1>Edit your channel here</h1>
+
+<p>ID: {{channel.id}}</p>
+<p>Full name: {{channel.name}}</p>
+<p>Created at {{channel.createdDate | date:'full'}}</p>
+<p>Type: {{channel.type}}</p>
+
+<button type="button" class="btn btn-danger" (click)="delete()">
+    <fa-icon [icon]="faBin"></fa-icon>Delete channel
+</button>
+<button mat-button class="btn btn-primary" mat-dialog-close>Close</button>

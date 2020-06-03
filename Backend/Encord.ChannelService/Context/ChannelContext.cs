@@ -89,7 +89,7 @@ namespace Encord.ChannelService.Context
             {
                 foreach (var channel in text)
                 {
-                    Remove(channel);
+                    DeleteChannel(channel);
                 }
             }
 
@@ -99,10 +99,10 @@ namespace Encord.ChannelService.Context
             {
                 foreach (var channel in voice)
                 {
-                    Remove(channel);
+                    DeleteChannel(channel);
                 }
             }
-            
+
             SaveChanges();
             return true;
         }
@@ -113,11 +113,11 @@ namespace Encord.ChannelService.Context
             {
                 case ChannelType.TextChannel:
                     var text = _mapper.Map<TextChannel>(channel);
-                    Add((object) text);
+                    Add((object)text);
                     break;
                 case ChannelType.VoiceChannel:
                     var voice = _mapper.Map<VoiceChannel>(channel);
-                    Add((object) voice);
+                    Add((object)voice);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -129,9 +129,28 @@ namespace Encord.ChannelService.Context
 
         public bool DeleteChannel(Channel channel)
         {
-            Remove(channel);
-            SaveChanges();
-            return true;
+            channel = getChannel(channel);
+            if (channel != null)
+            {
+                Remove(channel);
+                SaveChanges();
+                return true;
+            }
+
+            return false;
+        }
+
+        private Channel getChannel(Channel channel)
+        {
+            Channel result = null;
+
+            result = GetTextChannel(channel.Id);
+            if (result == null)
+            {
+                result = GetVoiceChannel(channel.Id);
+            }
+
+            return result;
         }
     }
 }

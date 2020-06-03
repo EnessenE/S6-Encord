@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Account } from '../../models/account';
 import { jwt_decode } from "jwt-decode";
 
@@ -11,6 +11,13 @@ import { jwt_decode } from "jwt-decode";
 export class AuthenticationService {
 
   constructor(private http: HttpClient) { }
+
+  public getHeaders(): HttpHeaders {
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': "bearer " + this.getToken()
+    })
+  }
 
   public login(account): Observable<Account> {
     return this.http.post<Account>(environment.api_base + `/account/login`, account);
@@ -25,36 +32,36 @@ export class AuthenticationService {
 
     if (decoded.exp === undefined) return null;
 
-    const date = new Date(0); 
+    const date = new Date(0);
     date.setUTCSeconds(decoded.exp);
     return date;
   }
 
   isTokenExpired(token?: string): boolean {
     return false;
-    if(!token) token = this.getToken();
-    if(!token) return true;
+    if (!token) token = this.getToken();
+    if (!token) return true;
 
     const date = this.getTokenExpirationDate(token);
-    if(date === undefined) return false;
+    if (date === undefined) return false;
     return !(date.valueOf() > new Date().valueOf());
   }
 
-  public setToken(token: string){
+  public setToken(token: string) {
     localStorage.setItem("Token", token);
   }
 
-  public clearToken(){
+  public clearToken() {
     localStorage.removeItem("Token");
   }
 
-  public getToken(){
+  public getToken() {
     return localStorage.getItem("Token");
   }
 
-  public tokenExistsAndValid(): boolean{
+  public tokenExistsAndValid(): boolean {
     var token = this.getToken();
-    if (token && !this.isTokenExpired(token)){
+    if (token && !this.isTokenExpired(token)) {
       return true;
     }
     return false;

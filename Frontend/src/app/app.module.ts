@@ -26,6 +26,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { CreatechannelComponent } from './parts/createchannel/createchannel.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { GuildsettingsComponent } from './parts/guildsettings/guildsettings.component';
+import { ChannelsettingsComponent } from './parts/channelsettings/channelsettings.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { GuildsettingsComponent } from './parts/guildsettings/guildsettings.comp
     RegisterComponent,
     CreateguildComponent,
     CreatechannelComponent,
-    GuildsettingsComponent
+    GuildsettingsComponent,
+    ChannelsettingsComponent,
   ],
   imports: [
     BrowserModule,

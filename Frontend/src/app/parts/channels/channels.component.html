@@ -1,19 +1,29 @@
-<a *ngFor="let channel of channels" (click)="onSelect(channel)">
-    <div class="list">
-        <div class="table">
-            <div class="table-cell channelbox">
-                <div *ngIf="channel.type == 'TextChannel'; then thenBlock else elseBlock"></div>
-                <ng-template #thenBlock><fa-icon [icon]="faAlignLeft"></fa-icon></ng-template>
-                <ng-template #elseBlock><fa-icon [icon]="faHeadphonesAlt"></fa-icon></ng-template>
-                {{channel.name}}
+<a *ngFor="let channel of channels; let i = index" (click)=" onSelect(channel)">
+    <div (mouseenter)="onHover(i)" (mouseleave)="onHover(-1)">
+        <div class="list">
+            <div class="row">
+                <div class="col-10 channelbox">
+                    <div *ngIf="channel.type == 'TextChannel'; then thenBlock else elseBlock"></div>
+                    <ng-template #thenBlock>
+                        <fa-icon [icon]="faAlignLeft"></fa-icon>
+                    </ng-template>
+                    <ng-template #elseBlock>
+                        <fa-icon [icon]="faHeadphonesAlt"></fa-icon>
+                    </ng-template>
+                    {{channel.name}}
+                </div>
+                <div class="col-2 channelbox">
+                    <a (click)="channelSettings(channel)">
+                        <fa-icon [icon]="faCog" *ngIf="i == hoverIndex"></fa-icon>
+                    </a>
+                </div>
             </div>
-
         </div>
     </div>
 </a>
 <a>
-    <div class="guild" (click)="CreateChannel()">
-        <div class="table">
+    <div class="guild" (click)="createChannel()">
+        <div class="table channelbox">
             <div class="table-cell">
                 Create a channel
             </div>
