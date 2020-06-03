@@ -4,6 +4,7 @@ import { GuildService } from 'src/app/services/GuildService/guild.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CreateguildComponent } from '../createguild/createguild.component';
 import { Router } from '@angular/router';
+import { ChatService } from 'src/app/services/ChatService/chat.service';
 
 @Component({
   selector: 'app-guilds',
@@ -15,10 +16,14 @@ export class GuildsComponent implements OnInit {
 
   constructor(private guildService: GuildService, 
     private dialog: MatDialog,
-    private router: Router) { }
+    private router: Router,
+    private chatService: ChatService) { }
 
   ngOnInit(): void {
     this.loadAllGuilds();
+    this.chatService.guildDeletion.subscribe((guild: Guild) => {
+      this.loadAllGuilds();
+    })
   }
 
   loadAllGuilds(){

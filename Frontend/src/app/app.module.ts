@@ -20,14 +20,14 @@ import { CreateguildComponent } from './parts/createguild/createguild.component'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { CreatechannelComponent } from './parts/createchannel/createchannel.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { GuildsettingsComponent } from './parts/guildsettings/guildsettings.component';
 import { ChannelsettingsComponent } from './parts/channelsettings/channelsettings.component';
-
+import { NgxBootstrapAlertNotificationModule } from "@benevideschissanga/ngx-bootstrap-alert-notification"
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,6 +54,7 @@ import { ChannelsettingsComponent } from './parts/channelsettings/channelsetting
     MatDialogModule,
     BrowserAnimationsModule,
     FontAwesomeModule,
+    NgxBootstrapAlertNotificationModule.forRoot()
   ],
   providers: [
     AuthenticationService,

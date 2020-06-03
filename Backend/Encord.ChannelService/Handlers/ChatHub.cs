@@ -39,7 +39,6 @@ namespace Encord.ChannelService.Handlers
             await Clients.All.SendAsync("MessageReceived", msg);
         }
 
-
         public override Task OnConnectedAsync()
         {
             _logger.LogInformation("A new client has connected");

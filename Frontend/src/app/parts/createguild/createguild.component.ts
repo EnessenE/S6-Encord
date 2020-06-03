@@ -36,7 +36,6 @@ export class CreateguildComponent implements OnInit {
         error => {
           this.errorText = error;
         });
-      this.close(null);
       }
     else{
       return false;

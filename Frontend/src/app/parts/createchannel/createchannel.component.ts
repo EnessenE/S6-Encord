@@ -51,7 +51,6 @@ export class CreatechannelComponent implements OnInit {
         error => {
           this.errorText = error;
         });
-      this.close(null);
     }
     else{
       //this.submitted = false

@@ -7,6 +7,7 @@ import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
 import { CreatechannelComponent } from '../createchannel/createchannel.component';
 import { faCog, faHeadphonesAlt, faAlignLeft } from '@fortawesome/free-solid-svg-icons';
 import { ChannelsettingsComponent } from '../channelsettings/channelsettings.component';
+import { ChatService } from 'src/app/services/ChatService/chat.service';
 
 @Component({
   selector: 'app-channels',
@@ -29,10 +30,14 @@ export class ChannelsComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private channelService: ChannelService,
     private dialog: MatDialog,
-    private router: Router) { }
+    private router: Router,
+    private chatService: ChatService) { }
 
   ngOnInit(): void {
     this.getChannels()
+    this.chatService.deletionReceived.subscribe((channel: Channel) => {
+      this.getChannels();
+    })
   }
 
   channelSettings(channel: Channel) {
@@ -52,7 +57,6 @@ export class ChannelsComponent implements OnInit {
       }
     });
   }
-
 
   getFirstTextChannel(): Channel{
     console.log("Finding a channel to select");

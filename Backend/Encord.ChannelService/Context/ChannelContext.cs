@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using Encord.ChannelService.Enums;
+using Encord.ChannelService.Handlers;
 using Encord.ChannelService.Interfaces;
 using Encord.ChannelService.Models;
 using Encord.Common.Configuration;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Logging;
@@ -18,15 +20,17 @@ namespace Encord.ChannelService.Context
         private readonly IOptions<SQLSettings> _sqlSettings;
         private readonly ILogger<ChannelContext> _logger;
         private readonly IMapper _mapper;
+        private readonly IHubContext<ChatHub> _chatHub;
 
         public DbSet<TextChannel> TextChannels { get; set; }
         public DbSet<VoiceChannel> VoiceChannels { get; set; }
 
-        public ChannelContext(IOptions<SQLSettings> _SqlSettings, ILogger<ChannelContext> logger, IMapper mapper)
+        public ChannelContext(IOptions<SQLSettings> _SqlSettings, ILogger<ChannelContext> logger, IMapper mapper, IHubContext<ChatHub> chatHub)
         {
             _sqlSettings = _SqlSettings;
             _logger = logger;
             _mapper = mapper;
+            _chatHub = chatHub;
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -89,7 +93,7 @@ namespace Encord.ChannelService.Context
             {
                 foreach (var channel in text)
                 {
-                    DeleteChannel(channel);
+                    RemoveChannel(channel);
                 }
             }
 
@@ -99,11 +103,12 @@ namespace Encord.ChannelService.Context
             {
                 foreach (var channel in voice)
                 {
-                    DeleteChannel(channel);
+                    RemoveChannel(channel);
                 }
             }
 
             SaveChanges();
+
             return true;
         }
 
@@ -132,12 +137,18 @@ namespace Encord.ChannelService.Context
             channel = getChannel(channel);
             if (channel != null)
             {
-                Remove(channel);
+                RemoveChannel(channel);
                 SaveChanges();
                 return true;
             }
 
             return false;
+        }
+
+        private void RemoveChannel(Channel channel)
+        {
+            _chatHub.Clients.All.SendAsync("ChannelDeleted", channel);
+            Remove(channel);
         }
 
         private Channel getChannel(Channel channel)

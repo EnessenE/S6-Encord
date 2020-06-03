@@ -3,6 +3,7 @@ import { Channel } from 'src/app/models/channel';
 import { ChatService } from 'src/app/services/ChatService/chat.service';
 import { Message } from 'src/app/models/message';
 import { ChannelService } from 'src/app/services/ChannelService/channel.service';
+import { NgxBootstrapAlertNotificationService } from '@benevideschissanga/ngx-bootstrap-alert-notification';
 
 @Component({
   selector: 'app-chatview',
