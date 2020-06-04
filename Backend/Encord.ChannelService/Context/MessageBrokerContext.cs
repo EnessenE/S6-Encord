@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Encord.ChannelService.Handlers;
 using Encord.Common.Configuration;
-using Encord.Common.Models;
+using Encord.Common.MessageBrokerModels;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;

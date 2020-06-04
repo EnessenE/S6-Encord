@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Encord.Common;
-using Encord.GuildService.Models;
+using Encord.Common.Models;
 
 namespace Encord.GuildService.Interfaces
 {

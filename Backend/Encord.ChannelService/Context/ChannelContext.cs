@@ -7,8 +7,10 @@ using Encord.ChannelService.Handlers;
 using Encord.ChannelService.Interfaces;
 using Encord.ChannelService.Models;
 using Encord.Common.Configuration;
+using Encord.Common.Models;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -85,9 +87,10 @@ namespace Encord.ChannelService.Context
 
         }
 
-        public bool DeleteAllChannelsInGuild(string guildId)
+        public bool DeleteAllChannelsInGuild(Guild guild)
         {
-            var text = TextChannels.Where(x => x.GuildID == guildId);
+            _chatHub.Clients.All.SendAsync("GuildDeleted", guild);
+            var text = TextChannels.Where(x => x.GuildID == guild.Id);
 
             if (text.Any())
             {
@@ -97,7 +100,7 @@ namespace Encord.ChannelService.Context
                 }
             }
 
-            var voice = VoiceChannels.Where(x => x.GuildID == guildId);
+            var voice = VoiceChannels.Where(x => x.GuildID == guild.Id);
 
             if (voice.Any())
             {

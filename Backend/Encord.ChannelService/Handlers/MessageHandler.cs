@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Encord.ChannelService.Interfaces;
-using Encord.Common.Models;
+using Encord.Common.MessageBrokerModels;
 using Microsoft.Extensions.Logging;
 
 namespace Encord.ChannelService.Handlers
@@ -25,7 +25,7 @@ namespace Encord.ChannelService.Handlers
 
             if (channelMessage.Deletion)
             {
-                _channelContext.DeleteAllChannelsInGuild(channelMessage.GuildId);
+                _channelContext.DeleteAllChannelsInGuild(channelMessage.Guild);
             }
         }
     }

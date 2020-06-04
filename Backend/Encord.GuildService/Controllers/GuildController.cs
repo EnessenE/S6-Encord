@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Encord.ChannelService.Context;
 using Encord.Common;
+using Encord.Common.MessageBrokerModels;
 using Encord.Common.Models;
+using Encord.GuildService.Context;
 using Encord.GuildService.Interfaces;
-using Encord.GuildService.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -80,7 +80,7 @@ namespace Encord.GuildService.Controllers
             bool result = _guildContext.DeleteGuild(newGuild);
             ChannelMessage message = new ChannelMessage()
             {
-                GuildId =  newGuild.Id,
+                Guild =  newGuild,
                 Deletion = true
             };
             _messageBroker.CreateMessage("Channel", message);

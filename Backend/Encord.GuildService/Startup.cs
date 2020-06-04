@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
-using Encord.ChannelService.Context;
 using Encord.Common.Configuration;
 using Encord.GuildService.Context;
 using Encord.GuildService.Interfaces;
