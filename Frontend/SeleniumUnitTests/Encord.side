@@ -100,73 +100,83 @@
       ],
       "value": ""
     }, {
-      "id": "0c52d958-1886-4e85-b515-6c0267b3aaad",
+      "id": "b589a3dc-7f28-43a9-b410-be7e423cfc0b",
       "comment": "",
       "command": "click",
-      "target": "css=a:nth-child(1) > .list .table-cell",
+      "target": "css=a:nth-child(1) .col-10",
       "targets": [
-        ["css=a:nth-child(1) > .list .table-cell", "css:finder"],
-        ["xpath=//app-channels/a/div/div/div", "xpath:position"]
+        ["css=a:nth-child(1) .col-10", "css:finder"],
+        ["xpath=//div/div/div/div", "xpath:position"]
       ],
       "value": ""
     }, {
-      "id": "af342bbc-e508-43c3-89b6-877e42ff76e7",
+      "id": "47112f4e-cf53-4ab0-a9c5-3004e467e7c4",
       "comment": "",
       "command": "click",
-      "target": "css=a:nth-child(2) > .list .table-cell",
+      "target": "css=a:nth-child(2) .col-10",
       "targets": [
-        ["css=a:nth-child(2) > .list .table-cell", "css:finder"],
-        ["xpath=//app-channels/a[2]/div/div/div", "xpath:position"]
+        ["css=a:nth-child(2) .col-10", "css:finder"],
+        ["xpath=//a[2]/div/div/div/div", "xpath:position"]
       ],
       "value": ""
     }, {
-      "id": "609f365e-175a-4ac3-bd75-a279442ba38a",
+      "id": "0b83895e-a547-4a71-9461-a648deed676f",
       "comment": "",
       "command": "click",
-      "target": "css=a:nth-child(1) > .list .table-cell",
+      "target": "css=a:nth-child(3) .col-10",
       "targets": [
-        ["css=a:nth-child(1) > .list .table-cell", "css:finder"],
-        ["xpath=//app-channels/a/div/div/div", "xpath:position"]
+        ["css=a:nth-child(3) .col-10", "css:finder"],
+        ["xpath=//a[3]/div/div/div/div", "xpath:position"]
       ],
       "value": ""
     }, {
-      "id": "9aecb649-1a3c-43dd-bcba-c8848719eb87",
+      "id": "2f1aa020-854b-4af6-a165-dde26fccaaaf",
       "comment": "",
       "command": "click",
-      "target": "css=a:nth-child(2) > .list .table-cell",
+      "target": "css=a:nth-child(4) .col-10",
       "targets": [
-        ["css=a:nth-child(2) > .list .table-cell", "css:finder"],
-        ["xpath=//app-channels/a[2]/div/div/div", "xpath:position"]
+        ["css=a:nth-child(4) .col-10", "css:finder"],
+        ["xpath=//a[4]/div/div/div/div", "xpath:position"]
       ],
       "value": ""
     }, {
-      "id": "9b26de63-8f99-4770-ba64-0c3f3f82cfba",
+      "id": "7dbacbad-6f94-48a3-985a-38303e7ac2a2",
       "comment": "",
       "command": "click",
-      "target": "css=a:nth-child(2) > .guild",
+      "target": "css=a:nth-child(1) .col-10",
       "targets": [
-        ["css=a:nth-child(2) > .guild", "css:finder"],
-        ["xpath=//a[2]/div", "xpath:position"]
+        ["css=a:nth-child(1) .col-10", "css:finder"],
+        ["xpath=//div/div/div/div", "xpath:position"]
       ],
       "value": ""
     }, {
-      "id": "bce37e02-6478-4375-b37a-d41d6d210066",
+      "id": "9a1e6550-9cb3-4f7c-9a6c-33f56b55bad8",
       "comment": "",
       "command": "click",
-      "target": "css=.channelbox",
+      "target": "css=a:nth-child(2) .col-10",
       "targets": [
-        ["css=.channelbox", "css:finder"],
-        ["xpath=//app-channels/a/div/div/div", "xpath:position"]
+        ["css=a:nth-child(2) .col-10", "css:finder"],
+        ["xpath=//a[2]/div/div/div/div", "xpath:position"]
       ],
       "value": ""
     }, {
-      "id": "5b9d46c2-a487-47ec-b17a-1025d5cc0699",
+      "id": "b1295ab7-78b7-4dd3-9044-20064109ed52",
       "comment": "",
       "command": "click",
-      "target": "css=.channelbox",
+      "target": "css=a:nth-child(3) .col-10",
       "targets": [
-        ["css=.channelbox", "css:finder"],
-        ["xpath=//app-channels/a/div/div/div", "xpath:position"]
+        ["css=a:nth-child(3) .col-10", "css:finder"],
+        ["xpath=//a[3]/div/div/div/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "486f085a-be4f-4c6d-8c78-2117e417e0d9",
+      "comment": "",
+      "command": "click",
+      "target": "css=a:nth-child(4) .col-10",
+      "targets": [
+        ["css=a:nth-child(4) .col-10", "css:finder"],
+        ["xpath=//a[4]/div/div/div/div", "xpath:position"]
       ],
       "value": ""
     }]
