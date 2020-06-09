@@ -6,6 +6,7 @@ import { GuildsettingsComponent } from '../guildsettings/guildsettings.component
 import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
 import { Channel } from 'src/app/models/channel';
 import { Title } from '@angular/platform-browser';
+import { ChatService } from 'src/app/services/ChatService/chat.service';
 
 @Component({
   selector: 'app-guildview',
@@ -21,13 +22,18 @@ export class GuildviewComponent implements OnInit {
     private dialog: MatDialog,
     private guildService: GuildService,
     private router: Router,
-    private titleService: Title) { }
+    private titleService: Title,
+    private chatService: ChatService) { }
 
   ngOnInit(): void {
     this.getGuild()
     this.router.events.subscribe((val) => {
       this.getGuild();
     });
+
+    this.chatService.guildDeletion.subscribe((guild: Guild) => {
+      this.guild = null;
+    })
   }
 
   selectChannel($event) {

@@ -93,13 +93,13 @@ namespace Encord.ChannelService.Context
         public async Task<bool> DeleteAllChannelsInGuildAsync(Guild guild)
         {
             _chatHub.Clients.All.SendAsync("GuildDeleted", guild);
-            var text = TextChannels.Where(x => x.GuildID == guild.Id);
+            var text = TextChannels.Where(x => x.GuildID == guild.Id).Include(m => m.Messages);
 
             if (text.Any())
             {
                 foreach (var channel in text)
                 {
-                    RemoveChannel(channel);
+                    await RemoveChannel(channel);
                 }
             }
 
@@ -114,6 +114,7 @@ namespace Encord.ChannelService.Context
             }
 
             await SaveChangesAsync();
+            _logger.LogInformation("Deleted all channels related to {guild}", guild.Name);
 
             return true;
         }
@@ -168,20 +169,21 @@ namespace Encord.ChannelService.Context
                 {
                     Remove(message);
                 }
+                channel.Messages.Clear();
             }
         }
 
         private async Task RemoveChannel(TextChannel channel)
         {
-            _chatHub.Clients.All.SendAsync("ChannelDeleted", channel);
             await RemoveAllMessages(channel);
             Remove(channel);
+            _chatHub.Clients.All.SendAsync("ChannelDeleted", channel);
         }
 
         private void RemoveChannel(VoiceChannel channel)
         {
-            _chatHub.Clients.All.SendAsync("ChannelDeleted", channel);
             Remove(channel);
+            _chatHub.Clients.All.SendAsync("ChannelDeleted", channel);
         }
 
         private Channel getChannel(Channel channel)
