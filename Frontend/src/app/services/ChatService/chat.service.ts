@@ -79,7 +79,7 @@ export class ChatService {
       this.guildDeletion.emit(guild);
       this.notificationService.show(
         {
-          type: 'info',
+          type: 'warning',
           message: 'The guild ' + guild.name + " was deleted. \n All messages sent have been lost.",
           icon: 'icon icon-bell-55',
           title: 'A guild was deleted',

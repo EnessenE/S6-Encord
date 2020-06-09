@@ -35,7 +35,7 @@ namespace Encord.ChannelService.Handlers
             {
                 Id = msg.ChannelId
             };
-            _channelContext.AddMessage(channel, msg);
+            await _channelContext.AddMessageAsync(channel, msg);
             await Clients.All.SendAsync("MessageReceived", msg);
         }
 

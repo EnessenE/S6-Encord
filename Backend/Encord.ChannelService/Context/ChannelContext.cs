@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoMapper;
 using Encord.ChannelService.Enums;
 using Encord.ChannelService.Handlers;
@@ -50,19 +51,21 @@ namespace Encord.ChannelService.Context
             return channel;
         }
 
-        public void AddMessage(TextChannel channel, Message message)
+        public async Task AddMessageAsync(TextChannel channel, Message message)
         {
             channel = GetTextChannel(channel.Id);
             if (channel != null)
             {
+                message.ChannelId = channel.Id;
                 if (channel.Messages == null)
                 {
                     channel.Messages = new List<Message>();
                 }
-
                 channel.Messages.Add(message);
-                SaveChanges();
-            }
+
+                Add(message);
+            } 
+            await SaveChangesAsync();
         }
 
         public VoiceChannel GetVoiceChannel(string id)
@@ -87,7 +90,7 @@ namespace Encord.ChannelService.Context
 
         }
 
-        public bool DeleteAllChannelsInGuild(Guild guild)
+        public async Task<bool> DeleteAllChannelsInGuildAsync(Guild guild)
         {
             _chatHub.Clients.All.SendAsync("GuildDeleted", guild);
             var text = TextChannels.Where(x => x.GuildID == guild.Id);
@@ -110,12 +113,12 @@ namespace Encord.ChannelService.Context
                 }
             }
 
-            SaveChanges();
+            await SaveChangesAsync();
 
             return true;
         }
 
-        public Channel CreateChannel(Channel channel)
+        public async Task<Channel> CreateChannelAsync(Channel channel)
         {
             switch (channel.Type)
             {
@@ -131,24 +134,51 @@ namespace Encord.ChannelService.Context
                     throw new ArgumentOutOfRangeException();
             }
 
-            SaveChanges();
+            await SaveChangesAsync();
             return channel; //GuildId is filled by entity
         }
 
-        public bool DeleteChannel(Channel channel)
+        public async Task<bool> DeleteChannelAsync(Channel channel)
         {
-            channel = getChannel(channel);
-            if (channel != null)
+            TextChannel textChannel = GetTextChannel(channel.Id);
+            if (textChannel != null)
             {
-                RemoveChannel(channel);
-                SaveChanges();
+                RemoveChannel(textChannel);
+                await SaveChangesAsync();
+                return true;
+            }
+            VoiceChannel voiceChannel = GetVoiceChannel(channel.Id);
+            if (voiceChannel != null)
+            {
+                RemoveChannel(voiceChannel);
+                await SaveChangesAsync();
                 return true;
             }
 
             return false;
         }
 
-        private void RemoveChannel(Channel channel)
+        private async Task RemoveAllMessages(TextChannel channel)
+        {
+            if (channel.Messages != null)
+            {
+                _logger.LogInformation("About to clear {msg} messages from textchannel {channel}",
+                    channel.Messages.Count, channel.Name);
+                foreach (var message in channel.Messages)
+                {
+                    Remove(message);
+                }
+            }
+        }
+
+        private async Task RemoveChannel(TextChannel channel)
+        {
+            _chatHub.Clients.All.SendAsync("ChannelDeleted", channel);
+            await RemoveAllMessages(channel);
+            Remove(channel);
+        }
+
+        private void RemoveChannel(VoiceChannel channel)
         {
             _chatHub.Clients.All.SendAsync("ChannelDeleted", channel);
             Remove(channel);

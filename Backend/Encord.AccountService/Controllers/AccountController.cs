@@ -44,7 +44,7 @@ namespace Encord.AccountService.Controllers
                 var appUser = _userManager.Users.SingleOrDefault(r => r.NormalizedUserName == model.Username.ToUpper());
                 LoginDto login = new LoginDto();
                 login.Username = model.Username;
-                login.Token = await GenerateJwtToken(model.Username, appUser);
+                login.Token = await GenerateJwtToken(appUser.UserName, appUser);
                 return login;
             }
 

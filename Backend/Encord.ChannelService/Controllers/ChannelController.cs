@@ -51,16 +51,16 @@ namespace Encord.ChannelService.Controllers
         }
 
         [HttpPost]
-        public Channel CreateChannel(Channel channel)
+        public async Task<Channel> CreateChannel(Channel channel)
         {
             channel.CreatedDate = DateTime.Now;
-            return _channelContext.CreateChannel(channel);
+            return await _channelContext.CreateChannelAsync(channel);
         }
 
         [HttpDelete]
-        public bool DeleteChannel(Channel channel)
+        public async Task<bool> DeleteChannel(Channel channel)
         {
-            return _channelContext.DeleteChannel(channel);
+            return await _channelContext.DeleteChannelAsync(channel);
         }
     }
 }

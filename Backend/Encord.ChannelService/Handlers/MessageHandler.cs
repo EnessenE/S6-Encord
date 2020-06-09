@@ -25,7 +25,7 @@ namespace Encord.ChannelService.Handlers
 
             if (channelMessage.Deletion)
             {
-                _channelContext.DeleteAllChannelsInGuild(channelMessage.Guild);
+                _channelContext.DeleteAllChannelsInGuildAsync(channelMessage.Guild);
             }
         }
     }

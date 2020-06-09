@@ -12,12 +12,12 @@ namespace Encord.ChannelService.Interfaces
         TextChannel GetTextChannel(string id);
         VoiceChannel GetVoiceChannel(string id);
 
-        void AddMessage(TextChannel channel, Message message);
+        Task AddMessageAsync(TextChannel channel, Message message);
         List<Channel> GetAllChannelsInGuild(string guildId);
 
-        bool DeleteAllChannelsInGuild(Guild guild);
+        Task<bool> DeleteAllChannelsInGuildAsync(Guild guild);
 
-        Channel CreateChannel(Channel guild);
-        bool DeleteChannel(Channel channel);
+        Task<Channel> CreateChannelAsync(Channel guild);
+       Task<bool> DeleteChannelAsync(Channel channel);
     }
 }
