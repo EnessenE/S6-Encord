@@ -6,6 +6,7 @@ using System.Net;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Encord.AccountService.Logic;
 using Encord.AccountService.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -23,15 +24,17 @@ namespace Encord.AccountService.Controllers
         private readonly SignInManager<Account> _signInManager;
         private readonly UserManager<Account> _userManager;
         private readonly IConfiguration _configuration;
+        private AccountLogic _accountLogic;
 
         public AccountController(
             UserManager<Account> userManager,
             SignInManager<Account> signInManager,
-            IConfiguration configuration)
+            IConfiguration configuration, AccountLogic accountLogic)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _configuration = configuration;
+            _accountLogic = accountLogic;
         }
 
         [HttpPost("login")]
@@ -44,7 +47,7 @@ namespace Encord.AccountService.Controllers
                 var appUser = _userManager.Users.SingleOrDefault(r => r.NormalizedUserName == model.Username.ToUpper());
                 LoginDto login = new LoginDto();
                 login.Username = model.Username;
-                login.Token = await GenerateJwtToken(appUser.UserName, appUser);
+                login.Token = await _accountLogic.GenerateJWTToken(appUser);
                 return login;
             }
 
@@ -68,8 +71,8 @@ namespace Encord.AccountService.Controllers
                 LoginDto login = new LoginDto()
                 {
                     Username = user.UserName,
-                    Token = await GenerateJwtToken(user.UserName, user)
-                };
+                    Token = await _accountLogic.GenerateJWTToken(user)
+            };
                 return login;
             }
 
@@ -103,39 +106,6 @@ namespace Encord.AccountService.Controllers
             }
 
             return currentUser;
-        }
-
-
-        private async Task<string> GenerateJwtToken(string userName, Account user)
-        {
-            var claims = new List<Claim>
-            {
-                new Claim(JwtRegisteredClaimNames.Sub, userName),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(ClaimTypes.NameIdentifier, user.Id)
-            };
-
-            var roles = await _userManager.GetRolesAsync(user);
-
-            foreach (var role in roles)
-            {
-                var roleClaim = new Claim(ClaimTypes.Role, role);
-                claims.Add(roleClaim);
-            }
-
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtKey"]));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-            var expires = DateTime.Now.AddDays(Convert.ToDouble(_configuration["JwtExpireDays"]));
-
-            var token = new JwtSecurityToken(
-                _configuration["JwtIssuer"],
-                _configuration["JwtIssuer"],
-                claims,
-                expires: expires,
-                signingCredentials: creds
-            );
-
-            return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }
 }

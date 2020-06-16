@@ -3,6 +3,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Text;
 using Encord.AccountService.Context;
+using Encord.AccountService.Logic;
 using Encord.AccountService.Models;
 using Encord.Common.Configuration;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -14,6 +15,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using NSwag;
 using NSwag.Generation.Processors.Security;
@@ -60,6 +62,7 @@ namespace Encord.AccountService
             }));
 
             services.Configure<SQLSettings>(Configuration.GetSection("SQLSettings"));
+            services.Configure<JWTSettings>(Configuration.GetSection("JWT"));
 
             // ===== Add Identity ========
             services.AddIdentity<Account, Role>()
@@ -67,6 +70,7 @@ namespace Encord.AccountService
                 .AddDefaultTokenProviders();
 
             services.AddTransient<IdentityContext>();
+            services.AddTransient<AccountLogic>();
 
             // ===== Add our DbContext ========
             services.AddDbContext<IdentityContext>();
@@ -76,6 +80,10 @@ namespace Encord.AccountService
             {
                 // options.
             });
+
+            // ===== Add Jwt Authentication ========
+            var sp = services.BuildServiceProvider();
+            var options = sp.GetService<IOptions<JWTSettings>>().Value;
 
             // ===== Add Jwt Authentication ========
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear(); // => remove default claims
@@ -91,9 +99,11 @@ namespace Encord.AccountService
                 cfg.SaveToken = true;
                 cfg.TokenValidationParameters = new TokenValidationParameters
                 {
-                    ValidIssuer = Configuration["JwtIssuer"],
-                    ValidAudience = Configuration["JwtIssuer"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JwtKey"])),
+                    ValidIssuer = options.Issuer,
+                    ValidAudience = options.Issuer,
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(options.Key)),
                     ClockSkew = TimeSpan.Zero // remove delay of token when expire
                 };
             });
