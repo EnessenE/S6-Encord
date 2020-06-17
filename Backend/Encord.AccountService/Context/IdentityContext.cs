@@ -1,4 +1,6 @@
-﻿using Encord.AccountService.Models;
+﻿using Cassandra;
+using Cassandra.DataStax.Graph;
+using Encord.AccountService.Models;
 using Encord.Common.Configuration;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -20,7 +22,7 @@ namespace Encord.AccountService.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(_connectionString);
+            optionsBuilder.UseCassandra(_connectionString);
         }
     }
 }
